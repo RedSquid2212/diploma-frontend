@@ -1,23 +1,50 @@
 import { FC, memo } from 'react';
 import './StartPage.scss';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { CircleButton } from '../../components/CircleButton/CircleButton';
 
 const StartPageComponent: FC = () => {
     return (
-        <>
+        <div className='start-page'>
             <h1 className='heading'>
                 Into atoms
             </h1>
+            <CircleButton
+                text='войти'
+                width={150}
+                height={150}
+                backgroundColor='#00F5D4'
+                position={{
+                    left: '25%',
+                    top: '300px',
+                }}
+                animated={false}
+            />
+            <CircleButton
+                text='продолжить игру'
+                width={250}
+                height={250}
+                backgroundColor='#6200EE'
+                position={{
+                    top: '200px',
+                    right: '20%',
+                }}
+                animated={false}
+            />
             <Link to={'/courses'}>
-                <Button
-                    className='MuiButtonBase-root start-button'
-                    type='button'
-                >
-                    Начать
-                </Button>
+                <CircleButton
+                    text='начать'
+                    width={300}
+                    height={300}
+                    backgroundColor='#FF10F0'
+                    position={{
+                        bottom: '60px',
+                        left: 'calc(50% - 150px)',
+                    }}
+                    animated={true}
+                />
             </Link>
-        </>
+        </div>
     );
 };
 
