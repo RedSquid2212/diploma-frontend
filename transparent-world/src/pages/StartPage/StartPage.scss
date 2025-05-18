@@ -1,12 +1,39 @@
 .heading {
-    color: white;
+    color: #FFFFFF;
+    text-transform: uppercase;
 }
 
-.start-button {
+.MuiButtonBase-root.start-button {
     border-radius: 50%;
     background-color: #FF10F0;
     width: 250px;
     height: 250px;
     cursor: pointer;
-    font-size: 44px;
+    font-size: 32px;
+    color: #1E1E1E;
+    margin: 0 auto;
+    position: fixed;
+    bottom: 60px;
+    left: calc(50% - 125px);
+    text-transform: none;
+    animation: pulse 2s infinite;
+}
+
+.MuiButtonBase-root.start-button:hover {
+    background-color: #F15BB5;
+}
+
+@keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0 #FF10F0;
+      box-shadow: 0 0 0 0 #FF10F0;
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 20px #1E1E1E;
+        box-shadow: 0 0 0 20px #1E1E1E;
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 #1E1E1E;
+        box-shadow: 0 0 0 0 #1E1E1E;
+    }
 }

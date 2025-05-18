@@ -1,13 +1,21 @@
 import { FC, memo } from 'react';
 import './StartPage.scss';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 const StartPageComponent: FC = () => {
     return (
         <>
-            <h1 className='heading'>Into atoms</h1>
+            <h1 className='heading'>
+                Into atoms
+            </h1>
             <Link to={'/courses'}>
-                <button className='start-button'>Начать</button>
+                <Button
+                    className='MuiButtonBase-root start-button'
+                    type='button'
+                >
+                    Начать
+                </Button>
             </Link>
         </>
     );
