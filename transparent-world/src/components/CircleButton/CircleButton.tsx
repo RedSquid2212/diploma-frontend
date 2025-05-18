@@ -15,6 +15,7 @@ type Props = {
     readonly height: number;
     readonly backgroundColor: string;
     readonly position: Position;
+    readonly positionType: 'absolute' | 'relative' | 'static',
     readonly animated: boolean;
 };
 
@@ -24,6 +25,7 @@ const CircleButtonComponent: FC<Props> = ({
     height,
     backgroundColor,
     position,
+    positionType,
     animated,
 }) => {
     const buttonStyle = {
@@ -31,6 +33,7 @@ const CircleButtonComponent: FC<Props> = ({
         width,
         height,
         backgroundColor,
+        position: positionType,
         ...position,
     };
     const className = `MuiButtonBase-root circle-button ${animated ? 'animated' : ''}`;

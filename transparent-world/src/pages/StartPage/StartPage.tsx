@@ -18,6 +18,7 @@ const StartPageComponent: FC = () => {
                     left: '25%',
                     top: '300px',
                 }}
+                positionType='absolute'
                 animated={false}
             />
             <CircleButton
@@ -29,6 +30,7 @@ const StartPageComponent: FC = () => {
                     top: '200px',
                     right: '20%',
                 }}
+                positionType='absolute'
                 animated={false}
             />
             <Link to={'/courses'}>
@@ -41,6 +43,7 @@ const StartPageComponent: FC = () => {
                         bottom: '60px',
                         left: 'calc(50% - 150px)',
                     }}
+                    positionType='absolute'
                     animated={true}
                 />
             </Link>
