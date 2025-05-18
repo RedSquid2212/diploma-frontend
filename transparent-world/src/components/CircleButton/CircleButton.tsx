@@ -1,6 +1,6 @@
-import { FC, memo } from "react";
+import { FC, memo } from 'react';
 import './CircleButton.scss';
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 
 type Position = {
     readonly top?: string;
