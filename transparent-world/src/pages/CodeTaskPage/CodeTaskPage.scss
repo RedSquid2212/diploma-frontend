@@ -1,0 +1,22 @@
+.code-task-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: "Underdog", system-ui;
+}
+
+.code-task {
+    color: #E0E0E0;
+    padding: 20px;
+}
+
+.code-task-title {
+    font-size: 40px;
+    padding-bottom: 20px;
+    margin: 0;
+}
+
+.code-task-text {
+    font-size: 20px;
+    padding-top: 20px;
+    margin: 0;
+}
