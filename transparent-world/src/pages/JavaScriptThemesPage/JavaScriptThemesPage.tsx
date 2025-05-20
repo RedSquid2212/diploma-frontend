@@ -6,7 +6,7 @@ import './JavaScriptThemesPage.scss';
 const JavaScriptThemesPageComponent: FC = () => {
     return (
         <div className="grid-container">
-            <ThemesGrid themes={jsThemes}/>
+            <ThemesGrid themes={jsThemes} colorBase={170} />
         </div>
     );
 };
