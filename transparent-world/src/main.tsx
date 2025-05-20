@@ -6,6 +6,7 @@ import { StartPage } from './pages/StartPage/StartPage.tsx';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
 import { JavaScriptThemesPage } from './pages/JavaScriptThemesPage/JavaScriptThemesPage.tsx';
 import { CssThemesPage } from './pages/CssThemesPage/CssThemesPage.tsx';
+import { HtmlThemesPage } from './pages/HtmlThemesPage/HtmlThemesPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/courses/css',
     element: <CssThemesPage />,
+  },
+  {
+    path: '/courses/html',
+    element: <HtmlThemesPage />,
   },
 ]);
 
