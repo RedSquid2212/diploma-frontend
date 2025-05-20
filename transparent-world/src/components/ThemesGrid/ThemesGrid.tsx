@@ -11,9 +11,15 @@ type Props = {
 };
 
 const ThemesGridComponent: FC<Props> = ({ themes, colorBase }) => {
+    const themesCount = themes.length;
     return (
         <div>
-            <Grid container spacing={3} columns={{xl: 5, md: 4, sm: 3, xs: 2}} className="themes-container">
+            <Grid
+                container
+                spacing={3}
+                columns={{xl: themesCount / 2 * 150 > 1200 ? themesCount / 4 : themesCount / 2, md: 4, sm: 3, xs: 2}}
+                className="themes-container"
+            >
                 {
                     themes.map((theme, index) => (
                         <Grid key={index} size={1} className="theme-cell">
