@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { StartPage } from './pages/StartPage/StartPage.tsx';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
 import { JavaScriptThemesPage } from './pages/JavaScriptThemesPage/JavaScriptThemesPage.tsx';
+import { CssThemesPage } from './pages/CssThemesPage/CssThemesPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/courses/js',
     element: <JavaScriptThemesPage />,
+  },
+  {
+    path: '/courses/css',
+    element: <CssThemesPage />,
   },
 ]);
 

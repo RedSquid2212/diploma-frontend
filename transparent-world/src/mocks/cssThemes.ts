@@ -37,7 +37,7 @@ export const cssThemes: readonly Theme[] = [
         practice: [],
     },
     {
-        name: 'CSS Custom Properties)',
+        name: 'CSS Custom Properties',
         theory: [],
         practice: [],
     },
