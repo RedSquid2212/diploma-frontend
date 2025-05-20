@@ -1,12 +1,11 @@
-.themes-container {
+.MuiGrid-root.themes-container {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
 }
 
-.theme-cell {
+.MuiGrid-root.theme-cell {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
