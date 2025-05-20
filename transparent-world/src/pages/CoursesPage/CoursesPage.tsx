@@ -27,6 +27,7 @@ const CoursesPageComponent: FC = () => {
                     height={250}
                     position={{}}
                     positionType='static'
+                    fontSize='32px'
                     animated={false}
                     backgroundColor='#FF10F0'
                 />
@@ -47,6 +48,7 @@ const CoursesPageComponent: FC = () => {
                     position={{}}
                     positionType='static'
                     animated={false}
+                    fontSize='32px'
                     backgroundColor='#00F5D4'
                 />
             </div>
@@ -66,6 +68,7 @@ const CoursesPageComponent: FC = () => {
                     position={{}}
                     positionType='static'
                     animated={false}
+                    fontSize='32px'
                     backgroundColor='#6200EE'
                 />
             </div>

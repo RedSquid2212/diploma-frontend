@@ -14,6 +14,7 @@ type Props = {
     readonly width: number;
     readonly height: number;
     readonly backgroundColor: string;
+    readonly fontSize: string;
     readonly position: Position;
     readonly positionType: 'absolute' | 'relative' | 'static',
     readonly animated: boolean;
@@ -24,6 +25,7 @@ const CircleButtonComponent: FC<Props> = ({
     width,
     height,
     backgroundColor,
+    fontSize,
     position,
     positionType,
     animated,
@@ -33,6 +35,7 @@ const CircleButtonComponent: FC<Props> = ({
         width,
         height,
         backgroundColor,
+        fontSize,
         position: positionType,
         ...position,
     };

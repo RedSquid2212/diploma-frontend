@@ -18,6 +18,7 @@ const StartPageComponent: FC = () => {
                     left: '25%',
                     top: '300px',
                 }}
+                fontSize='32px'
                 positionType='absolute'
                 animated={false}
             />
@@ -30,6 +31,7 @@ const StartPageComponent: FC = () => {
                     top: '200px',
                     right: '20%',
                 }}
+                fontSize='32px'
                 positionType='absolute'
                 animated={false}
             />
@@ -43,6 +45,7 @@ const StartPageComponent: FC = () => {
                         bottom: '60px',
                         left: 'calc(50% - 150px)',
                     }}
+                    fontSize='32px'
                     positionType='absolute'
                     animated={true}
                 />

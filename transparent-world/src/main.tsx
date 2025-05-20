@@ -4,6 +4,7 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { StartPage } from './pages/StartPage/StartPage.tsx';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
+import { JavaScriptThemesPage } from './pages/JavaScriptThemesPage/JavaScriptThemesPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ const router = createBrowserRouter([
   {
     path: '/courses',
     element: <CoursesPage />,
-  }
+  },
+  {
+    path: '/courses/js',
+    element: <JavaScriptThemesPage />,
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(
