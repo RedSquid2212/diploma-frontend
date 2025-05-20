@@ -21,16 +21,18 @@ const CoursesPageComponent: FC = () => {
                     position: 'absolute',
                     pointerEvents: 'none',
                 }}/>
-                <CircleButton
-                    text='HTML'
-                    width={250}
-                    height={250}
-                    position={{}}
-                    positionType='static'
-                    fontSize='32px'
-                    animated={false}
-                    backgroundColor='#FF10F0'
-                />
+                <Link to={'/courses/html'}>
+                    <CircleButton
+                        text='HTML'
+                        width={250}
+                        height={250}
+                        position={{}}
+                        positionType='static'
+                        fontSize='32px'
+                        animated={false}
+                        backgroundColor='#FF10F0'
+                    />
+                </Link>
             </div>
             <div className='container2'>
                 <div style={{
@@ -41,16 +43,18 @@ const CoursesPageComponent: FC = () => {
                     position: 'absolute',
                     pointerEvents: 'none',
                 }}/>
-                <CircleButton
-                    text='JS'
-                    width={250}
-                    height={250}
-                    position={{}}
-                    positionType='static'
-                    animated={false}
-                    fontSize='32px'
-                    backgroundColor='#00F5D4'
-                />
+                <Link to={'/courses/js'}>
+                    <CircleButton
+                        text='JS'
+                        width={250}
+                        height={250}
+                        position={{}}
+                        positionType='static'
+                        animated={false}
+                        fontSize='32px'
+                        backgroundColor='#00F5D4'
+                    />
+                </Link>
             </div>
             <div className='container3'>
                 <div style={{
@@ -61,16 +65,18 @@ const CoursesPageComponent: FC = () => {
                     position: 'absolute',
                     pointerEvents: 'none',
                 }}/>
-                <CircleButton
-                    text='CSS'
-                    width={250}
-                    height={250}
-                    position={{}}
-                    positionType='static'
-                    animated={false}
-                    fontSize='32px'
-                    backgroundColor='#6200EE'
-                />
+                <Link to={'/courses/css'}>
+                    <CircleButton
+                        text='CSS'
+                        width={250}
+                        height={250}
+                        position={{}}
+                        positionType='static'
+                        animated={false}
+                        fontSize='32px'
+                        backgroundColor='#6200EE'
+                    />
+                </Link>
             </div>
         </div>
     )
