@@ -20,3 +20,15 @@
     padding-top: 20px;
     margin: 0;
 }
+
+.code-task-editor {
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiButtonBase-root.send-button {
+    margin-right: 20px;
+    align-self: flex-end;
+    text-transform: none;
+    font-family: "Underdog", system-ui;
+}
