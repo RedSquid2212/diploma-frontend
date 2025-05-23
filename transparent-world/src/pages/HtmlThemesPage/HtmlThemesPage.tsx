@@ -5,7 +5,7 @@ import { htmlThemes } from '../../mocks/htmlThemes';
 const HtmlThemesPageComponent: FC = () => {
     return (
         <div>
-            <ThemesGrid themes={htmlThemes} colorBase={320} />
+            <ThemesGrid themes={htmlThemes} colorBase={320} course='html' />
         </div>
     );
 };

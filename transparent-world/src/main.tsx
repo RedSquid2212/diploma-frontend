@@ -46,10 +46,6 @@ const router = createBrowserRouter([
     element: <HtmlThemesPage />,
   },
   {
-    path: '/courses/js/task',
-    element: <CodeTaskPage task={{title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
-  },
-  {
     path: '/courses/js/:theme',
     element: <TheoryAndPracticePage buttonColor={jsColor} />,
   },
@@ -60,6 +56,14 @@ const router = createBrowserRouter([
   {
     path: '/courses/html/:theme',
     element: <TheoryAndPracticePage buttonColor={htmlColor} />,
+  },
+  {
+    path: '/courses/html/:theme/theory',
+    element: <TheoryAndPracticePage buttonColor={htmlColor} />,
+  },
+  {
+    path: '/courses/js/:theme/practice/:task',
+    element: <CodeTaskPage task={{title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
   },
 ]);
 
