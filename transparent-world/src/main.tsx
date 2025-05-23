@@ -9,6 +9,8 @@ import { CssThemesPage } from './pages/CssThemesPage/CssThemesPage.tsx';
 import { HtmlThemesPage } from './pages/HtmlThemesPage/HtmlThemesPage.tsx';
 import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
 import { TaskType } from './models/taskType.enum.ts';
+import { TheoryAndPracticePage } from './pages/TheoryAndPracticePage/TheoryAndPracticePage.tsx';
+import { generateColorInPalette } from './utils/colorGenerator.ts';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -17,6 +19,10 @@ const mockTaskText = `
   in the coming chapters. In the main.ts example above, we simply start up our HTTP listener, which lets the application
   await inbound HTTP requests.
 `;
+
+const jsColor = generateColorInPalette(170, [70, 90], [50, 70]);
+const htmlColor = generateColorInPalette(320, [70, 90], [50, 70]);
+const cssColor = generateColorInPalette(220, [70, 90], [50, 70]);
 
 const router = createBrowserRouter([
   {
@@ -42,6 +48,18 @@ const router = createBrowserRouter([
   {
     path: '/courses/js/task',
     element: <CodeTaskPage task={{title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
+  },
+  {
+    path: '/courses/js/:theme',
+    element: <TheoryAndPracticePage buttonColor={jsColor} />,
+  },
+  {
+    path: '/courses/css/:theme',
+    element: <TheoryAndPracticePage buttonColor={cssColor} />,
+  },
+  {
+    path: '/courses/html/:theme',
+    element: <TheoryAndPracticePage buttonColor={htmlColor} />,
   },
 ]);
 
