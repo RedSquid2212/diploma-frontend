@@ -11,6 +11,10 @@ import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
 import { TaskType } from './models/taskType.enum.ts';
 import { TheoryAndPracticePage } from './pages/TheoryAndPracticePage/TheoryAndPracticePage.tsx';
 import { generateColorInPalette } from './utils/colorGenerator.ts';
+import { TheoryPage } from './pages/TheoryPage/TheoryPage.tsx';
+import { jsThemes } from './mocks/jsThemes.ts';
+import { cssThemes } from './mocks/cssThemes.ts';
+import { htmlThemes } from './mocks/htmlThemes.ts';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -47,19 +51,27 @@ const router = createBrowserRouter([
   },
   {
     path: '/courses/js/:theme',
-    element: <TheoryAndPracticePage buttonColor={jsColor} />,
+    element: <TheoryAndPracticePage buttonColor={jsColor} course='js' />,
   },
   {
     path: '/courses/css/:theme',
-    element: <TheoryAndPracticePage buttonColor={cssColor} />,
+    element: <TheoryAndPracticePage buttonColor={cssColor} course='css' />,
   },
   {
     path: '/courses/html/:theme',
-    element: <TheoryAndPracticePage buttonColor={htmlColor} />,
+    element: <TheoryAndPracticePage buttonColor={htmlColor} course='html' />,
+  },
+  {
+    path: '/courses/js/:theme/theory',
+    element: <TheoryPage themes={jsThemes} courseColor={jsColor} />,
+  },
+  {
+    path: '/courses/css/:theme/theory',
+    element: <TheoryPage themes={cssThemes} courseColor={cssColor} />,
   },
   {
     path: '/courses/html/:theme/theory',
-    element: <TheoryAndPracticePage buttonColor={htmlColor} />,
+    element: <TheoryPage themes={htmlThemes} courseColor={htmlColor} />,
   },
   {
     path: '/courses/js/:theme/practice/:task',
