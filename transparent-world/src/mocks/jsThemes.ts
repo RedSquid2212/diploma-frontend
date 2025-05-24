@@ -1,3 +1,4 @@
+import { TaskType } from '../models/taskType.enum';
 import { Theme } from '../models/theme';
 
 export const jsThemes: Theme[] = [
@@ -97,7 +98,14 @@ export const jsThemes: Theme[] = [
                 text: '',
             },
         ],
-        practice: [],
+        practice: [
+            {
+                id: 'calculator',
+                title: 'Калькулятор',
+                type: TaskType.Code,
+                text: `Реализуйте функцию calculate(a, b, operation), где operation может быть +, -, *, /`,
+            }
+        ],
     },
     {
         name: 'cycles',

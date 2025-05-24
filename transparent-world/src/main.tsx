@@ -15,6 +15,7 @@ import { TheoryPage } from './pages/TheoryPage/TheoryPage.tsx';
 import { jsThemes } from './mocks/jsThemes.ts';
 import { cssThemes } from './mocks/cssThemes.ts';
 import { htmlThemes } from './mocks/htmlThemes.ts';
+import { PracticePage } from './pages/PracticePage/PracticePage.tsx';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -74,8 +75,20 @@ const router = createBrowserRouter([
     element: <TheoryPage themes={htmlThemes} courseColor={htmlColor} />,
   },
   {
+    path: '/courses/js/:theme/practice',
+    element: <PracticePage course={'js'} themes={jsThemes} courseColor={jsColor} />,
+  },
+  {
+    path: '/courses/css/:theme/practice',
+    element: <PracticePage course={'css'} themes={cssThemes} courseColor={cssColor} />,
+  },
+  {
+    path: '/courses/html/:theme/practice',
+    element: <PracticePage course={'html'} themes={htmlThemes} courseColor={htmlColor} />,
+  },
+  {
     path: '/courses/js/:theme/practice/:task',
-    element: <CodeTaskPage task={{title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
+    element: <CodeTaskPage task={{id: 'nest', title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
   },
 ]);
 

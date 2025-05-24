@@ -1,6 +1,7 @@
 import { TaskType } from './taskType.enum';
 
 export type Task = {
+    readonly id: string;
     readonly title: string;
     readonly type: TaskType;
     readonly text: string;

@@ -25,7 +25,7 @@ const TheoryAndPracticePageComponent: FC<Props> = ({ buttonColor, course }) => {
                     animated={false}
                 />
             </Link>
-            <Link to={`/courses/${course}/practice`}>
+            <Link to={`/courses/${course}/${theme}/practice`}>
                 <CircleButton
                     text='Практика'
                     width={300}
