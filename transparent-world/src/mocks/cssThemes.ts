@@ -2,42 +2,50 @@ import { Theme } from '../models/theme';
 
 export const cssThemes: readonly Theme[] = [
     {
-        name: 'Основы CSS',
+        name: 'css-basics',
+        label: 'Основы CSS',
         theory: [],
         practice: [],
     },
     {
-        name: 'Работа с текстом и шрифтами',
+        name: 'texts',
+        label: 'Работа с текстом и шрифтами',
         theory: [],
         practice: [],
     },
     {
-        name: 'Блочная модель (Box Model)',
+        name: 'block-model',
+        label: 'Блочная модель (Box Model)',
         theory: [],
         practice: [],
     },
     {
-        name: 'Позиционирование и Flexbox',
+        name: 'positioning',
+        label: 'Позиционирование и Flexbox',
         theory: [],
         practice: [],
     },
     {
-        name: 'Grid Layout',
+        name: 'grid',
+        label: 'Grid Layout',
         theory: [],
         practice: [],
     },
     {
-        name: 'Анимации и трансформации',
+        name: 'animation',
+        label: 'Анимации и трансформации',
         theory: [],
         practice: [],
     },
     {
-        name: 'Адаптивный дизайн',
+        name: 'adaptive',
+        label: 'Адаптивный дизайн',
         theory: [],
         practice: [],
     },
     {
-        name: 'CSS Custom Properties',
+        name: 'custom-properties',
+        label: 'CSS Custom Properties',
         theory: [],
         practice: [],
     },

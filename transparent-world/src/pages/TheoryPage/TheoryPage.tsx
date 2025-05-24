@@ -13,14 +13,13 @@ type Props = {
 const TheoryPageComponent: FC<Props> = ({ themes, courseColor }) => {
     const { theme } = useParams();
     const chapters = themes.find(courseTheme => courseTheme.name === theme)?.theory;
-    console.log(chapters);
     return (
         <div className={styles.container}>
             {
                 chapters?.map((chapter, index) => (
                     <CircleButton
                         key={index}
-                        text={chapter.name}
+                        text={chapter.label}
                         width={200}
                         height={200}
                         backgroundColor={courseColor}

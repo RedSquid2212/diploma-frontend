@@ -27,7 +27,7 @@ const ThemesGridComponent: FC<Props> = ({ themes, colorBase, course }) => {
                         <Grid key={index} size={1} className="theme-cell">
                             <Link to={`/courses/${course}/${theme.name}`}>
                                 <CircleButton
-                                    text={`${index + 1}. ${theme.name}`}
+                                    text={`${index + 1}. ${theme.label}`}
                                     width={150}
                                     height={150}
                                     backgroundColor={generateColorInPalette(colorBase, [70, 90], [50, 70])}

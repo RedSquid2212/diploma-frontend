@@ -2,42 +2,50 @@ import { Theme } from '../models/theme';
 
 export const htmlThemes: readonly Theme[] = [
     {
-        name: 'Основы HTML',
+        name: 'html-basics',
+        label: 'Основы HTML',
         theory: [],
         practice: [],
     },
     {
-        name: 'Семантическая разметка',
+        name: 'semantic',
+        label: 'Семантическая разметка',
         theory: [],
         practice: [],
     },
     {
-        name: 'Формы и интерактивные элементы',
+        name: 'forms',
+        label: 'Формы и интерактивные элементы',
         theory: [],
         practice: [],
     },
     {
-        name: 'Мультимедиа и графики',
+        name: 'charts',
+        label: 'Мультимедиа и графики',
         theory: [],
         practice: [],
     },
     {
-        name: 'Таблицы',
+        name: 'tables',
+        label: 'Таблицы',
         theory: [],
         practice: [],
     },
     {
-        name: 'Доступность (a11y)',
+        name: 'accessibility',
+        label: 'Доступность (a11y)',
         theory: [],
         practice: [],
     },
     {
-        name: 'Интеграция с API браузера',
+        name: 'integration',
+        label: 'Интеграция с API браузера',
         theory: [],
         practice: [],
     },
     {
-        name: 'Современные API',
+        name: 'modern-api',
+        label: 'Современные API',
         theory: [],
         practice: [],
     },
