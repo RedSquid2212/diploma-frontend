@@ -19,6 +19,7 @@ import { PracticePage } from './pages/PracticePage/PracticePage.tsx';
 import { GeometryRunnerPage } from './pages/GeometryRunnerPage/GeometryRunnerPage.tsx';
 import { LoginPage } from './pages/LoginPage/LoginPage.tsx';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage.tsx';
+import { ParticlesBackground } from './components/ParticlesBackground/ParticlesBackground.tsx';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -109,6 +110,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <ParticlesBackground />
     <RouterProvider router={router} />
   </StrictMode>,
 )
