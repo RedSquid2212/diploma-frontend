@@ -18,6 +18,7 @@ import { htmlThemes } from './mocks/htmlThemes.ts';
 import { PracticePage } from './pages/PracticePage/PracticePage.tsx';
 import { GeometryRunnerPage } from './pages/GeometryRunnerPage/GeometryRunnerPage.tsx';
 import { LoginPage } from './pages/LoginPage/LoginPage.tsx';
+import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage.tsx';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/registration',
+    element: <RegistrationPage />,
   },
   {
     path: '/courses',
