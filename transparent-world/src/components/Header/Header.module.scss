@@ -1,0 +1,23 @@
+.header {
+    background-color: #0D0D0D;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+}
+
+.links {
+    display: flex;
+    gap: 40px;
+
+    a {
+        color: white;
+        text-decoration: none;
+        font-family: "Underdog", system-ui;
+        transition: color 0.6s;
+    }
+
+    a:hover {
+        color: #FF10F0;
+    }
+}
