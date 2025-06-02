@@ -1,0 +1,47 @@
+.courseCard {
+    width: 350px;
+}
+
+.MuiCardContent-root.courseCardContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary.js > span {
+    background-color: rgb(255 216 0);
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary.js {
+    background-color: rgb(255 216 0 / 0.4);
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary.css > span {
+    background-color: rgb(0 58 255);
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary.css {
+    background-color: rgb(0 58 255 / 0.4);
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary.html > span {
+    background-color: rgb(255 72 0);
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary.html {
+    background-color: rgb(255 72 0 / 0.4);
+}
+
+.courseStatistic {
+    display: flex;
+    justify-content: space-between;
+}
+
+.MuiTypography-root.MuiTypography-body2 {
+    font-family: inherit;
+    font-size: 24px;
+}
+
+.MuiButtonBase-root.courseButton {
+    text-transform: none;
+    font-family: inherit;
+}

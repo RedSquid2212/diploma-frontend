@@ -1,83 +1,38 @@
 import { FC, memo } from 'react';
-import { CircleButton } from '../../components/CircleButton/CircleButton';
-import { Button } from '@mui/material';
-import './CoursesPage.scss';
-import { Link } from 'react-router-dom';
+import { CourseCard } from '../../components/CourseCard/CourseCard';
+
+import styles from './CoursesPage.module.scss';
 
 const CoursesPageComponent: FC = () => {
     return (
-        <div>
-            <Link to={'/'}>
-                <Button type='button' className='MuiButtonBase-root back-button'>
-                    &#8592;
-                </Button>
-            </Link>
-            <div className='container1'>
-                <div style={{
-                    width: 400,
-                    height: 400,
-                    border: '2px solid #FF10F0',
-                    borderRadius: '50%',
-                    position: 'absolute',
-                    pointerEvents: 'none',
-                }}/>
-                <Link to={'/courses/html'}>
-                    <CircleButton
-                        text='HTML'
-                        width={250}
-                        height={250}
-                        position={{}}
-                        positionType='static'
-                        fontSize='32px'
-                        animated={false}
-                        backgroundColor='#FF10F0'
-                    />
-                </Link>
-            </div>
-            <div className='container2'>
-                <div style={{
-                    width: 400,
-                    height: 400,
-                    border: '2px solid #00F5D4',
-                    borderRadius: '50%',
-                    position: 'absolute',
-                    pointerEvents: 'none',
-                }}/>
-                <Link to={'/courses/js'}>
-                    <CircleButton
-                        text='JS'
-                        width={250}
-                        height={250}
-                        position={{}}
-                        positionType='static'
-                        animated={false}
-                        fontSize='32px'
-                        backgroundColor='#00F5D4'
-                    />
-                </Link>
-            </div>
-            <div className='container3'>
-                <div style={{
-                    width: 400,
-                    height: 400,
-                    border: '2px solid #6200EE',
-                    borderRadius: '50%',
-                    position: 'absolute',
-                    pointerEvents: 'none',
-                }}/>
-                <Link to={'/courses/css'}>
-                    <CircleButton
-                        text='CSS'
-                        width={250}
-                        height={250}
-                        position={{}}
-                        positionType='static'
-                        animated={false}
-                        fontSize='32px'
-                        backgroundColor='#6200EE'
-                    />
-                </Link>
-            </div>
+        <div className={styles.coursesContainer}>
+            <CourseCard
+                courseName='JS'
+                title='Основы JavaScript'
+                courseColor='rgb(255 216 0)'
+                progress={12}
+                avatarSrc='/src/assets/js.png'
+                themesCount='18 тем'
+                hoursCount='~20 часов'
+            />
+            <CourseCard
+                courseName='CSS'
+                title='Основы CSS'
+                courseColor='rgb(0 58 255)'
+                progress={28}
+                avatarSrc='/src/assets/css.png'
+                themesCount='8 тем'
+                hoursCount='~12 часов'
+            />
+            <CourseCard
+                courseName='HTML'
+                title='Основы HTML'
+                courseColor='rgb(255 72 0)'
+                progress={90}
+                avatarSrc='/src/assets/html.png'
+                themesCount='8 тем'
+                hoursCount='~12 часов'
+            />
         </div>
     )
 };
