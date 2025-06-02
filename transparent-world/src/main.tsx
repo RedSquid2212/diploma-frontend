@@ -4,12 +4,8 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { StartPage } from './pages/StartPage/StartPage.tsx';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
-import { JavaScriptThemesPage } from './pages/JavaScriptThemesPage/JavaScriptThemesPage.tsx';
-import { CssThemesPage } from './pages/CssThemesPage/CssThemesPage.tsx';
-import { HtmlThemesPage } from './pages/HtmlThemesPage/HtmlThemesPage.tsx';
 import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
 import { TaskType } from './models/taskType.enum.ts';
-import { TheoryAndPracticePage } from './pages/TheoryAndPracticePage/TheoryAndPracticePage.tsx';
 import { generateColorInPalette } from './utils/colorGenerator.ts';
 import { TheoryPage } from './pages/TheoryPage/TheoryPage.tsx';
 import { jsThemes } from './mocks/jsThemes.ts';
@@ -56,54 +52,30 @@ const router = createBrowserRouter([
   },
   {
     path: '/courses/js',
-    element: <JavaScriptThemesPage />,
-  },
-  {
-    path: '/courses/css',
-    element: <CssThemesPage />,
-  },
-  {
-    path: '/courses/html',
-    element: <HtmlThemesPage />,
-  },
-  {
-    path: '/courses/js/:theme',
-    element: <TheoryAndPracticePage buttonColor={jsColor} course='js' />,
-  },
-  {
-    path: '/courses/css/:theme',
-    element: <TheoryAndPracticePage buttonColor={cssColor} course='css' />,
-  },
-  {
-    path: '/courses/html/:theme',
-    element: <TheoryAndPracticePage buttonColor={htmlColor} course='html' />,
-  },
-  {
-    path: '/courses/js/:theme/theory',
     element: <TheoryPage themes={jsThemes} courseColor={jsColor} />,
   },
   {
-    path: '/courses/css/:theme/theory',
+    path: '/courses/css',
     element: <TheoryPage themes={cssThemes} courseColor={cssColor} />,
   },
   {
-    path: '/courses/html/:theme/theory',
+    path: '/courses/html',
     element: <TheoryPage themes={htmlThemes} courseColor={htmlColor} />,
   },
   {
-    path: '/courses/js/:theme/practice',
+    path: '/courses/js/practice',
     element: <PracticePage course={'js'} themes={jsThemes} courseColor={jsColor} />,
   },
   {
-    path: '/courses/css/:theme/practice',
+    path: '/courses/css/practice',
     element: <PracticePage course={'css'} themes={cssThemes} courseColor={cssColor} />,
   },
   {
-    path: '/courses/html/:theme/practice',
+    path: '/courses/html/practice',
     element: <PracticePage course={'html'} themes={htmlThemes} courseColor={htmlColor} />,
   },
   {
-    path: '/courses/js/:theme/practice/:task',
+    path: '/courses/js/practice/:task',
     element: <CodeTaskPage task={{id: 'nest', title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
   },
 ]);

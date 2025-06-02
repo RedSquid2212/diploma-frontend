@@ -1,0 +1,25 @@
+.contentContainer {
+    width: 600px;
+    padding: 20px;
+    color: #E0E0E0;
+    background-color: #1E1E1E;
+    font-family: 'Manrope', system-ui;
+    box-sizing: border-box;
+}
+
+.MuiAccordion-root.MuiAccordion-rounded {
+    background-color: #0D0D0D;
+    color: #E0E0E0;
+    font-family: 'Manrope', system-ui;
+    font-size: 18px;
+    padding: 12px;
+
+    .MuiAccordionSummary-content {
+        font-family: 'Manrope', system-ui;
+        font-size: 22px;
+    }
+}
+
+.MuiAccordion-root.MuiAccordion-rounded.Mui-expanded {
+    margin: 8px 0;
+}

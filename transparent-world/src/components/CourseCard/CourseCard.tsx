@@ -25,7 +25,7 @@ const CourseCardComponent: FC<Props> = ({
     return (
         <Card
             className='courseCard'
-            sx={{backgroundColor: '#1E1E1E', color: '#E0E0E0', fontFamily: 'Underdog, system-ui'}}
+            sx={{backgroundColor: '#1E1E1E', color: '#E0E0E0', fontFamily: 'Manrope, system-ui'}}
         >
             <CardHeader
                 avatar={

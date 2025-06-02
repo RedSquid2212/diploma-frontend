@@ -1,35 +1,22 @@
 import { FC, memo } from 'react';
-import { CircleButton } from '../../components/CircleButton/CircleButton';
-import { useParams } from 'react-router-dom';
-
-import styles from './TheoryPage.module.scss';
 import { Theme } from '../../models/theme';
+import { Header } from '../../components/Header/Header';
+import { CourseContent } from '../../components/CourseContent/CourseContent';
+import { CourseHeaderCard } from '../../components/CourseHeaderCard/CourseHeaderCard';
 
 type Props = {
     readonly themes: readonly Theme[];
     readonly courseColor: string;
 };
 
-const TheoryPageComponent: FC<Props> = ({ themes, courseColor }) => {
-    const { theme } = useParams();
-    const chapters = themes.find(courseTheme => courseTheme.name === theme)?.theory;
+const TheoryPageComponent: FC<Props> = ({ themes }) => {
     return (
-        <div className={styles.container}>
-            {
-                chapters?.map((chapter, index) => (
-                    <CircleButton
-                        key={index}
-                        text={chapter.label}
-                        width={200}
-                        height={200}
-                        backgroundColor={courseColor}
-                        fontSize='20px'
-                        position={{}}
-                        positionType='static'
-                        animated={false}
-                    />
-                ))
-            }
+        <div>
+            <Header />
+            <div>
+                <CourseHeaderCard />
+                <CourseContent themes={themes} />
+            </div>
         </div>
     );
 };
