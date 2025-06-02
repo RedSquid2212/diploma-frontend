@@ -16,22 +16,22 @@ const HeaderComponent: FC = () => {
                 />
             </Link>
             <div className={styles.links}>
-                <Link to={'/courses'}>
+                <Link to={'/'}>
                     Курсы
                 </Link>
-                <Link to={'/courses/js'}>
+                <Link to={'/js'}>
                     JavaScript
                 </Link>
-                <Link to={'/courses/css'}>
+                <Link to={'/css'}>
                     CSS
                 </Link>
-                <Link to={'/courses/html'}>
+                <Link to={'/html'}>
                     HTML
                 </Link>
-                <Link to={'/courses/html'}>
+                <Link to={'/html'}>
                     Игровой режим
                 </Link>
-                <Link to={'/courses/html'}>
+                <Link to={'/html'}>
                     Случайная задача
                 </Link>
             </div>

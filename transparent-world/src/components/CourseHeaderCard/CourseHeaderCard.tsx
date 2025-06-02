@@ -13,7 +13,7 @@ const CourseHeaderCardComponent: FC = () => {
             >
                 <div className='veil'></div>
                 <div className='courseInfo'>
-                    <Link to={'/courses'}>
+                    <Link to={'/'}>
                         <Button
                             type="button"
                             startIcon={<ArrowBackIcon />}

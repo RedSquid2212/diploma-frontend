@@ -2,7 +2,6 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { StartPage } from './pages/StartPage/StartPage.tsx';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
 import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
 import { TaskType } from './models/taskType.enum.ts';
@@ -16,6 +15,8 @@ import { GeometryRunnerPage } from './pages/GeometryRunnerPage/GeometryRunnerPag
 import { LoginPage } from './pages/LoginPage/LoginPage.tsx';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage.tsx';
 import { ParticlesBackground } from './components/ParticlesBackground/ParticlesBackground.tsx';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.tsx';
+import { AuthStatus } from './consts/authStatus.enum.ts';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -32,11 +33,15 @@ const cssColor = generateColorInPalette(220, [70, 90], [50, 70]);
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <StartPage />,
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <CoursesPage />
+    </PrivateRoute>,
   },
   {
     path: '/runner',
-    element: <GeometryRunnerPage />,
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <GeometryRunnerPage />
+    </PrivateRoute>,
   },
   {
     path: '/login',
@@ -47,36 +52,46 @@ const router = createBrowserRouter([
     element: <RegistrationPage />,
   },
   {
-    path: '/courses',
-    element: <CoursesPage />,
+    path: '/js',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <TheoryPage themes={jsThemes} courseColor={jsColor} />
+    </PrivateRoute>,
   },
   {
-    path: '/courses/js',
-    element: <TheoryPage themes={jsThemes} courseColor={jsColor} />,
+    path: '/css',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <TheoryPage themes={cssThemes} courseColor={cssColor} />
+    </PrivateRoute>,
   },
   {
-    path: '/courses/css',
-    element: <TheoryPage themes={cssThemes} courseColor={cssColor} />,
+    path: '/html',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <TheoryPage themes={htmlThemes} courseColor={htmlColor} />
+    </PrivateRoute>,
   },
   {
-    path: '/courses/html',
-    element: <TheoryPage themes={htmlThemes} courseColor={htmlColor} />,
+    path: '/js/practice',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <PracticePage course={'js'} themes={jsThemes} courseColor={jsColor} />
+    </PrivateRoute>,
   },
   {
-    path: '/courses/js/practice',
-    element: <PracticePage course={'js'} themes={jsThemes} courseColor={jsColor} />,
+    path: '/css/practice',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <PracticePage course={'css'} themes={cssThemes} courseColor={cssColor} />
+    </PrivateRoute>,
   },
   {
-    path: '/courses/css/practice',
-    element: <PracticePage course={'css'} themes={cssThemes} courseColor={cssColor} />,
+    path: '/html/practice',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <PracticePage course={'html'} themes={htmlThemes} courseColor={htmlColor} />
+    </PrivateRoute>,
   },
   {
-    path: '/courses/html/practice',
-    element: <PracticePage course={'html'} themes={htmlThemes} courseColor={htmlColor} />,
-  },
-  {
-    path: '/courses/js/practice/:task',
-    element: <CodeTaskPage task={{id: 'nest', title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code}}/>,
+    path: '/js/practice/:task',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <CodeTaskPage task={{ id: 'nest', title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code }} />
+    </PrivateRoute>,
   },
 ]);
 

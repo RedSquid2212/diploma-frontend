@@ -1,7 +1,6 @@
 import { FC, memo } from 'react';
 import { Theme } from '../../models/theme';
-import { Link, useParams } from 'react-router-dom';
-import { CircleButton } from '../../components/CircleButton/CircleButton';
+import { useParams } from 'react-router-dom';
 
 import styles from './PracticePage.module.scss';
 
@@ -11,28 +10,12 @@ type Props = {
     readonly courseColor: string;
 }
 
-const PracticePageComponent: FC<Props> = ({ course, themes, courseColor }) => {
+const PracticePageComponent: FC<Props> = ({ themes }) => {
     const { theme } = useParams();
-    const tasks = themes.find(courseTheme => courseTheme.name === theme)?.practice;
+    const tasks = themes.find(courseTheme => courseTheme.name === theme);
     return (
         <div className={styles.container}>
-            {
-                tasks?.map((task, index) => (
-                    <Link to={`/courses/${course}/${theme}/practice/${task.id}`}>
-                        <CircleButton
-                            key={index}
-                            text={task.title}
-                            width={200}
-                            height={200}
-                            backgroundColor={courseColor}
-                            fontSize='20px'
-                            position={{}}
-                            positionType='static'
-                            animated={false}
-                        />
-                    </Link>
-                ))
-            }
+            { tasks?.label }
         </div>
     );
 };
