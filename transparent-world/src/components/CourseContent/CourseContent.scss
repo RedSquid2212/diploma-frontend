@@ -5,6 +5,12 @@
     background-color: #1E1E1E;
     font-family: 'Manrope', system-ui;
     box-sizing: border-box;
+    flex-grow: 1;
+}
+
+.contentCardTitle {
+    padding: 0;
+    margin-top: 0;
 }
 
 .MuiAccordion-root.MuiAccordion-rounded {

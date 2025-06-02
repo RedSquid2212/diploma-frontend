@@ -1,21 +1,35 @@
 import { FC, memo } from 'react';
-import { Theme } from '../../models/theme';
 import { Header } from '../../components/Header/Header';
 import { CourseContent } from '../../components/CourseContent/CourseContent';
 import { CourseHeaderCard } from '../../components/CourseHeaderCard/CourseHeaderCard';
+import { ProgressCard } from '../../components/ProgressCard/ProgressCard';
 
-type Props = {
-    readonly themes: readonly Theme[];
-    readonly courseColor: string;
+import styles from './TheoryPage.module.scss';
+import { useParams } from 'react-router-dom';
+import { jsThemes } from '../../mocks/jsThemes';
+import { cssThemes } from '../../mocks/cssThemes';
+import { htmlThemes } from '../../mocks/htmlThemes';
+
+const courseNamesMapper: Record<string, string> = {
+    'js': 'JavaScript',
+    'css': 'CSS',
+    'html': 'HTML',
 };
 
-const TheoryPageComponent: FC<Props> = ({ themes }) => {
+const TheoryPageComponent: FC = () => {
+    const { course } = useParams();
+    const courseName = courseNamesMapper[course ?? 'unknown'];
+    const themes = course === 'js' ? jsThemes : (course === 'css' ? cssThemes : htmlThemes);
+    const courseColor = course === 'js' ? 'rgb(255 216 0)' : (course === 'css' ? 'rgb(0 58 255)' : 'rgb(255 72 0)');
     return (
         <div>
             <Header />
-            <div>
-                <CourseHeaderCard />
-                <CourseContent themes={themes} />
+            <div className={styles.mainContainer}>
+                <CourseHeaderCard courseName={courseName} />
+                <div className={styles.contentContainer}>
+                    <CourseContent themes={themes} />
+                    <ProgressCard courseColor={courseColor} />
+                </div>
             </div>
         </div>
     );

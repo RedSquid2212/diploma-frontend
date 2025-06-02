@@ -1,4 +1,9 @@
-.container {
-    padding: 0 40px;
-    box-sizing: border-box;
+.mainContainer {
+    padding: 0 100px;
+}
+
+.contentContainer {
+    display: flex;
+    gap: 100px;
+    margin-top: 20px;
 }

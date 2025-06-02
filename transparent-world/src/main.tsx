@@ -52,21 +52,9 @@ const router = createBrowserRouter([
     element: <RegistrationPage />,
   },
   {
-    path: '/js',
+    path: '/:course',
     element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-      <TheoryPage themes={jsThemes} courseColor={jsColor} />
-    </PrivateRoute>,
-  },
-  {
-    path: '/css',
-    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-      <TheoryPage themes={cssThemes} courseColor={cssColor} />
-    </PrivateRoute>,
-  },
-  {
-    path: '/html',
-    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-      <TheoryPage themes={htmlThemes} courseColor={htmlColor} />
+      <TheoryPage />
     </PrivateRoute>,
   },
   {

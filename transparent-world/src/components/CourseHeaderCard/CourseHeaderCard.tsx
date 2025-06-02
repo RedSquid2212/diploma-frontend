@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom';
 
 import './CourseHeaderCard.scss';
 
-const CourseHeaderCardComponent: FC = () => {
+type Props = {
+    readonly courseName: string;
+};
+
+const CourseHeaderCardComponent: FC<Props> = ({ courseName }) => {
     return (
         <>
             <Card
@@ -23,7 +27,7 @@ const CourseHeaderCardComponent: FC = () => {
                         </Button>
                     </Link>
                     <h1 className='courseTitle'>
-                        Основы HTML
+                        Основы { courseName }
                     </h1>
                     <div className='courseStat'>
                         <span>

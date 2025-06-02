@@ -12,7 +12,7 @@ type Props = {
 const CourseContentComponent: FC<Props> = ({ themes }) => {
     return (
         <div className='contentContainer'>
-            <h2>
+            <h2 className='contentCardTitle'>
                 Теория по курсу
             </h2>
             {
