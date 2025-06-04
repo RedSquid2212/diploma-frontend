@@ -16,17 +16,17 @@ const CodeTaskPageComponent: FC<Props> = ({ task }) => {
     const [editorValue, setEditorValue] = useState('');
     const buttonColor = generateColorInPalette(170, [70, 90], [50, 70]);
 
-    useEffect(() => {
-        const getLeaderboard = async () => {
-            await client.updateThemeProgress({
-                userId: '684083967bb40ec1a6381a4d',
-                courseId: '684083967bb40ec1a6381a4f',
-                themeId: '684083967bb40ec1a6381a81',
-                xp: 10,
-            });
-        };
-        getLeaderboard();
-    }, []);
+    // useEffect(() => {
+    //     const getLeaderboard = async () => {
+    //         await client.updateThemeProgress({
+    //             userId: '684083967bb40ec1a6381a4d',
+    //             courseId: '684083967bb40ec1a6381a4f',
+    //             themeId: '684083967bb40ec1a6381a81',
+    //             xp: 10,
+    //         });
+    //     };
+    //     getLeaderboard();
+    // }, []);
 
     const handleSendButtonClick = useCallback(() => {
         const problem = {

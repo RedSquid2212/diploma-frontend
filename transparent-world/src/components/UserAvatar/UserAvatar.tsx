@@ -4,6 +4,7 @@ import { FC, memo } from 'react';
 import { Avatar } from '@mui/material';
 
 import styles from './UserAvatar.module.scss';
+import { Link } from 'react-router-dom';
 
 type Props = {
   readonly username: string;
@@ -17,7 +18,9 @@ const UserAvatarComponent: FC<Props> = ({ username }) => {
 
     return (
       <div className={styles.avatarContainer}>
-        <Avatar alt={username} src={avatarSrc} sx={{ width: 56, height: 56 }} />
+        <Link to={'/profile'}>
+          <Avatar alt={username} src={avatarSrc} sx={{ width: 56, height: 56 }} />
+        </Link>
         <span>{ username }</span>
       </div>
     );

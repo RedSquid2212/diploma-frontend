@@ -2,6 +2,7 @@ import { Avatar, Button, Card, CardContent, CardHeader, LinearProgress } from '@
 import { FC, memo } from 'react';
 
 import './CourseCard.scss';
+import { Link } from 'react-router-dom';
 
 type Props = {
     readonly title: string;
@@ -25,7 +26,7 @@ const CourseCardComponent: FC<Props> = ({
     return (
         <Card
             className='courseCard'
-            sx={{backgroundColor: '#1E1E1E', color: '#E0E0E0', fontFamily: 'Manrope, system-ui'}}
+            sx={{ backgroundColor: '#1E1E1E', color: '#E0E0E0', fontFamily: 'Manrope, system-ui' }}
         >
             <CardHeader
                 avatar={
@@ -46,17 +47,19 @@ const CourseCardComponent: FC<Props> = ({
                     className={courseName.toLowerCase()}
                 />
                 <p className='courseStatistic'>
-                    <span>{ themesCount }</span>
-                    <span>{ hoursCount }</span>
+                    <span>{themesCount}</span>
+                    <span>{hoursCount}</span>
                 </p>
-                <Button
-                    type="button"
-                    variant="outlined"
-                    className='courseButton'
-                    sx={{backgroundColor: courseColor, color: '#1E1E1E'}}
-                >
-                    Продолжить обучение
-                </Button>
+                <Link to={`/${courseName.toLowerCase()}`}>
+                    <Button
+                        type="button"
+                        variant="outlined"
+                        className='courseButton'
+                        sx={{ backgroundColor: courseColor, color: '#1E1E1E' }}
+                    >
+                        Продолжить обучение
+                    </Button>
+                </Link>
             </CardContent>
         </Card>
     )
