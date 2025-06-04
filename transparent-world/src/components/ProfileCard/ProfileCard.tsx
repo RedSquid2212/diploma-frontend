@@ -17,18 +17,20 @@ const ProfileCardComponent: FC = () => {
             }}
         >
             <CardHeader
-                avatar={
+                title={
                     <UserAvatar username='Lina Shmantsar' />
+                }
+                subheader={
+                    <div className='statContainer'>
+                        <span>100 XP</span>
+                        <span>0 game XP</span>
+                        <span>1 уровень</span>
+                    </div>
                 }
             />
             <CardContent>
-                <div className='statContainer'>
-                    <span>100 XP</span>
-                    <span>0 game XP</span>
-                    <span>1 уровень</span>
-                </div>
                 <LevelProgress />
-                <hr />
+                <hr className='separator' />
                 <div className='userProgressContaner'>
                     <h2 className='progressHeader'>
                         Прогресс по курсам

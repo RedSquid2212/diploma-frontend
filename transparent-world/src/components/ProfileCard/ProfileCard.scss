@@ -6,18 +6,27 @@
 
 .MuiCardContent-root {
     padding: 0;
+}
 
+.MuiTypography-root {
     .statContainer {
         font-size: 14px;
         display: flex;
         gap: 12px;
         align-items: center;
         justify-content: center;
+        color: #E0E0E0;
+        margin-top: 8px;
     }
 }
 
 .progressHeader {
     font-weight: 400;
+    font-size: 20px;
+}
+
+.separator {
+    opacity: 0.4;
 }
 
 .userCoursesContainer {

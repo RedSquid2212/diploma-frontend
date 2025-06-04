@@ -1,0 +1,19 @@
+.levelProgress {
+    padding: 20px 0;
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary {
+    span {
+        background-color: #FF10F0;
+    }
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary {
+    background-color: rgb(255 16 240 / 0.4);
+}
+
+.levelStat {
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+}
