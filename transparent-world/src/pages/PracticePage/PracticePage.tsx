@@ -1,21 +1,18 @@
 import { FC, memo } from 'react';
-import { Theme } from '../../models/theme';
-import { useParams } from 'react-router-dom';
 
-import styles from './PracticePage.module.scss';
+import { Header } from '../../components/Header/Header';
+import { TestModal } from '../../components/TestModal/TestModal';
 
-type Props = {
-    readonly course: string;
-    readonly themes: readonly Theme[];
-    readonly courseColor: string;
-}
-
-const PracticePageComponent: FC<Props> = ({ themes }) => {
-    const { theme } = useParams();
-    const tasks = themes.find(courseTheme => courseTheme.name === theme);
+const PracticePageComponent: FC = () => {
     return (
-        <div className={styles.container}>
-            { tasks?.label }
+        <div>
+            <Header />
+            <TestModal
+                title='Тег для ссылки'
+                text='Какой HTML-тег создает ссылку?'
+                variants={['<a>', '<link>', '<p>', '<div>']}
+                answer='<a>'
+            />
         </div>
     );
 };

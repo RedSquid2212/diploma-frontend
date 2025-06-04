@@ -5,11 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
 import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
 import { TaskType } from './models/taskType.enum.ts';
-import { generateColorInPalette } from './utils/colorGenerator.ts';
 import { TheoryPage } from './pages/TheoryPage/TheoryPage.tsx';
-import { jsThemes } from './mocks/jsThemes.ts';
-import { cssThemes } from './mocks/cssThemes.ts';
-import { htmlThemes } from './mocks/htmlThemes.ts';
 import { PracticePage } from './pages/PracticePage/PracticePage.tsx';
 import { GeometryRunnerPage } from './pages/GeometryRunnerPage/GeometryRunnerPage.tsx';
 import { LoginPage } from './pages/LoginPage/LoginPage.tsx';
@@ -26,10 +22,6 @@ const mockTaskText = `
   in the coming chapters. In the main.ts example above, we simply start up our HTTP listener, which lets the application
   await inbound HTTP requests.
 `;
-
-const jsColor = generateColorInPalette(170, [70, 90], [50, 70]);
-const htmlColor = generateColorInPalette(320, [70, 90], [50, 70]);
-const cssColor = generateColorInPalette(220, [70, 90], [50, 70]);
 
 const router = createBrowserRouter([
   {
@@ -59,26 +51,14 @@ const router = createBrowserRouter([
     </PrivateRoute>,
   },
   {
+    path: '/:course/practice',
+    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+      <PracticePage />
+    </PrivateRoute>,
+  },
+  {
     path: '/profile',
     element: <ProfilePage />,
-  },
-  {
-    path: '/js/practice',
-    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-      <PracticePage course={'js'} themes={jsThemes} courseColor={jsColor} />
-    </PrivateRoute>,
-  },
-  {
-    path: '/css/practice',
-    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-      <PracticePage course={'css'} themes={cssThemes} courseColor={cssColor} />
-    </PrivateRoute>,
-  },
-  {
-    path: '/html/practice',
-    element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-      <PracticePage course={'html'} themes={htmlThemes} courseColor={htmlColor} />
-    </PrivateRoute>,
   },
   {
     path: '/js/practice/:task',
