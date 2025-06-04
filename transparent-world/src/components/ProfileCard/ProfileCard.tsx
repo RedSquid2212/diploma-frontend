@@ -36,9 +36,9 @@ const ProfileCardComponent: FC = () => {
                         Прогресс по курсам
                     </h2>
                     <div className='userCoursesContainer'>
-                        <div className='courseProgress'>
+                        <div className='userCourseProgress'>
                             <Avatar alt='JS' src='/src/assets/js.png' variant="rounded" />
-                            <span className='courseTitle'>
+                            <span className='userCourseTitle'>
                                 Основы JavaScript
                             </span>
                             <ProfileProgress
@@ -46,9 +46,9 @@ const ProfileCardComponent: FC = () => {
                                 courseProgress={45}
                             />
                         </div>
-                        <div className='courseProgress'>
+                        <div className='userCourseProgress'>
                             <Avatar alt='CSS' src='/src/assets/css.png' variant="rounded" />
-                            <span className='courseTitle'>
+                            <span className='userCourseTitle'>
                                 Основы CSS
                             </span>
                             <ProfileProgress
@@ -56,9 +56,9 @@ const ProfileCardComponent: FC = () => {
                                 courseProgress={14}
                             />
                         </div>
-                        <div className='courseProgress'>
+                        <div className='userCourseProgress'>
                             <Avatar alt='HTML' src='/src/assets/html.png' variant="rounded" />
-                            <span className='courseTitle'>
+                            <span className='userCourseTitle'>
                                 Основы HTML
                             </span>
                             <ProfileProgress
