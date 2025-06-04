@@ -1,8 +1,9 @@
 import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { FC, memo } from 'react';
+import { FC, memo, useState } from 'react';
 
 import './Leaderboard.scss';
+import { LeaderboardControls } from '../LeaderboardControls/LeaderboardControls';
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'id', headerName: 'Place', width: 90 },
@@ -32,27 +33,31 @@ const rows = [
 ];
 
 const LeaderboardComponent: FC = () => {
+    const [leaderboardType, setLeaderboardType] = useState<string>('general');
     return (
-        <Box>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 25,
+        <>
+            <Box>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: 25,
+                            },
                         },
-                    },
-                }}
-                pageSizeOptions={[25]}
-                disableRowSelectionOnClick
-                sx={{
-                    width: 'fit-content',
-                    backgroundColor: '#1E1E1E',
-                    color: '#E0E0E0',
-                }}
-            />
-        </Box>
+                    }}
+                    pageSizeOptions={[25]}
+                    disableRowSelectionOnClick
+                    sx={{
+                        width: 'fit-content',
+                        backgroundColor: '#1E1E1E',
+                        color: '#E0E0E0',
+                    }}
+                />
+            </Box>
+            <LeaderboardControls value={leaderboardType} onValueChange={setLeaderboardType} />
+        </>
     )
 };
 
