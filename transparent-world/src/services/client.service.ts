@@ -39,7 +39,10 @@ class Client {
 
     public async getUserCourses(userId: string) {
         try {
-            const response = await fetch(`${this.backendUrl}/progress/${userId}`);
+            const response = await fetch(`${this.backendUrl}/progress/${userId}`, {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
             const courses = await response.json();
             console.log(courses);
         } catch (error: unknown) {
@@ -81,7 +84,10 @@ class Client {
 
     public async getLeaderboard() {
         try {
-            const response = await fetch(`${this.backendUrl}/leaderboard`);
+            const response = await fetch(`${this.backendUrl}/leaderboard`, {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
             const leaderboard = await response.json();
             return leaderboard;
         } catch (error: unknown) {
@@ -91,7 +97,10 @@ class Client {
 
     public async getGameLeaderboard() {
         try {
-            const response = await fetch(`${this.backendUrl}/leaderboard/game`);
+            const response = await fetch(`${this.backendUrl}/leaderboard/game`, {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
             const leaderboard = await response.json();
             return leaderboard;
         } catch (error: unknown) {
