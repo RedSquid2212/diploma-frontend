@@ -1,0 +1,48 @@
+.MuiDataGrid-root {
+    .MuiDataGrid-topContainer {
+        .MuiDataGrid-columnHeader.MuiDataGrid-columnHeader--sortable {
+            background-color: #1E1E1E;
+        }
+
+        .MuiDataGrid-columnHeaders {
+            background-color: #1E1E1E;
+
+            .MuiDataGrid-row--borderBottom {
+                background-color: #1E1E1E;
+            }
+
+            .MuiDataGrid-iconButtonContainer {
+                .MuiDataGrid-sortButton {
+                    svg {
+                        fill: #E0E0E0;
+                        color: #E0E0E0;
+                    }
+                }
+            }
+
+            .MuiDataGrid-menuIconButton {
+                svg {
+                    fill: #E0E0E0;
+                }
+            }
+        }
+    }
+
+    .MuiDataGrid-virtualScrollerContent {
+        .MuiDataGrid-row:hover {
+            background-color: rgb(0 0 0 / 0.9);
+        }
+    }
+
+    .MuiDataGrid-footerContainer {
+        .MuiTablePagination-displayedRows {
+            color: #E0E0E0;
+        }
+
+        .MuiTablePaginationActions-root {
+            .MuiButtonBase-root {
+                color: white;
+            }
+        }
+    }
+}

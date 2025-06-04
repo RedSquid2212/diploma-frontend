@@ -17,6 +17,7 @@ import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage.tsx'
 import { ParticlesBackground } from './components/ParticlesBackground/ParticlesBackground.tsx';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.tsx';
 import { AuthStatus } from './consts/authStatus.enum.ts';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage.tsx';
 
 const mockTaskText = `
   To create a Nest application instance, we use the core NestFactory class. NestFactory exposes a few
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
     element: <PrivateRoute authStatus={AuthStatus.Authorized}>
       <TheoryPage />
     </PrivateRoute>,
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />,
   },
   {
     path: '/js/practice',
