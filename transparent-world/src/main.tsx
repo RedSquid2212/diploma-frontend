@@ -14,6 +14,7 @@ import { AuthStatus } from './consts/authStatus.enum.ts';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage.tsx';
 import { App } from './App.tsx';
 import { AppContextProvider } from './components/AppContext/AppContext.tsx';
+import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -50,10 +51,16 @@ const router = createBrowserRouter([
         path: '/profile',
         element: <ProfilePage />,
       },
-      // {
-      //   path: '/task/:taskId',
-      //   element: <CodeTaskPage />
-      // }
+      {
+        path: '/task/:taskId',
+        element: <CodeTaskPage />
+      },
+      {
+        path: '/:course/practice/:task',
+        element: <PrivateRoute authStatus={AuthStatus.Authorized}>
+          <CodeTaskPage />
+        </PrivateRoute>,
+      },
     ]
   },
   {
@@ -64,12 +71,6 @@ const router = createBrowserRouter([
     path: '/registration',
     element: <RegistrationPage />,
   },
-  // {
-  //     path: '/js/practice/:task',
-  //     element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-  //         <CodeTaskPage task={{ id: 'nest', title: 'First steps in Nest.js', text: mockTaskText, type: TaskType.Code }} />
-  //     </PrivateRoute>,
-  // },
 ]);
 
 createRoot(document.getElementById('root')!).render(
