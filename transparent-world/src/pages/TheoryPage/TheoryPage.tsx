@@ -9,12 +9,7 @@ import { useParams } from 'react-router-dom';
 import { jsThemes } from '../../mocks/jsThemes';
 import { cssThemes } from '../../mocks/cssThemes';
 import { htmlThemes } from '../../mocks/htmlThemes';
-
-const courseNamesMapper: Record<string, string> = {
-    'js': 'JavaScript',
-    'css': 'CSS',
-    'html': 'HTML',
-};
+import { courseNamesMapper } from '../../utils/courseNamesMapper';
 
 const TheoryPageComponent: FC = () => {
     const { course } = useParams();

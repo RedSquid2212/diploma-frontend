@@ -6,6 +6,32 @@ import { UpdateThemeProgressDto } from '../dto/updateThemeProgress.dto';
 class Client {
     constructor(private readonly backendUrl: string) {}
 
+    public async checkAuth() {
+        try {
+            const response = await fetch(`${this.backendUrl}/auth/check`, {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            const data = await response.json();
+            return data;
+        } catch (error: unknown) {
+            console.error(error);
+        }
+    }
+
+    public async getCurrentUser(username: string) {
+        try {
+            const response = await fetch(`${this.backendUrl}/auth/${encodeURIComponent(username)}`, {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            const userData = response.json();
+            return userData;
+        } catch (error: unknown) {
+            console.error(error);
+        }
+    }
+
     public async login(dto: LoginDto) {
         try {
             const response = await fetch(`${this.backendUrl}/auth/login`, {
@@ -44,7 +70,7 @@ class Client {
                 credentials: 'include',
             });
             const courses = await response.json();
-            console.log(courses);
+            return courses;
         } catch (error: unknown) {
             console.error(error);
         }
@@ -76,7 +102,7 @@ class Client {
                 body: JSON.stringify({ gameXp: newGameXp }),
             });
             const updatedCourses = await response.json();
-            console.log(updatedCourses);
+            return updatedCourses;
         } catch (error: unknown) {
             console.error(error);
         }

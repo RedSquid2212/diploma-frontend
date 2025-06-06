@@ -2,8 +2,12 @@ import { TaskType } from './taskType.enum';
 
 export type Task = {
     readonly id: string;
+    readonly themeId: string;
+    readonly xp: number;
     readonly title: string;
     readonly type: TaskType;
     readonly text: string;
-    readonly variants?: readonly string[] | Record<string, string>;
+    readonly placeholderCode?: string;
+    readonly tests: readonly string[];
+    readonly variants?: readonly string[];
 };

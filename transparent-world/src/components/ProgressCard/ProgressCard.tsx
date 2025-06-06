@@ -2,13 +2,14 @@ import { Button, Card, CardContent, CardHeader, CircularProgress } from '@mui/ma
 import { FC, memo } from 'react';
 
 import './ProgressCard.scss';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 type Props = {
     readonly courseColor: string;
 };
 
 const ProgressCardComponent: FC<Props> = ({ courseColor }) => {
+    const { course } = useParams();
     return (
         <Card
             className='progressCard'
@@ -28,7 +29,7 @@ const ProgressCardComponent: FC<Props> = ({ courseColor }) => {
                         sx={{color: courseColor}}
                     />
                 </div>
-                <Link to={'/'}>
+                <Link to={`/${course}/practice`}>
                     <Button
                         type="button"
                         variant="contained"
