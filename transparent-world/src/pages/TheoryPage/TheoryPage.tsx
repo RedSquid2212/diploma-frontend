@@ -5,17 +5,25 @@ import { CourseHeaderCard } from '../../components/CourseHeaderCard/CourseHeader
 import { ProgressCard } from '../../components/ProgressCard/ProgressCard';
 
 import styles from './TheoryPage.module.scss';
-import { useParams } from 'react-router-dom';
-import { jsThemes } from '../../mocks/jsThemes';
-import { cssThemes } from '../../mocks/cssThemes';
-import { htmlThemes } from '../../mocks/htmlThemes';
+import { useNavigate, useParams } from 'react-router-dom';
 import { courseNamesMapper } from '../../utils/courseNamesMapper';
+import { useAppContext } from '../../components/AppContext/AppContext';
 
 const TheoryPageComponent: FC = () => {
     const { course } = useParams();
+    const navigate = useNavigate();
+
     const courseName = courseNamesMapper[course ?? 'unknown'];
-    const themes = course === 'js' ? jsThemes : (course === 'css' ? cssThemes : htmlThemes);
     const courseColor = course === 'js' ? 'rgb(255 216 0)' : (course === 'css' ? 'rgb(0 58 255)' : 'rgb(255 72 0)');
+    const context = useAppContext();
+
+    if (!context) {
+        navigate('/login');
+    }
+
+    const themes = context?.data.courses
+        ?.filter(item => item.title === course?.toUpperCase())?.flatMap(item => item.themes) ?? [];
+
     return (
         <div>
             <Header />
