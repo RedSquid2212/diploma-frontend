@@ -50,6 +50,10 @@ const router = createBrowserRouter([
         path: '/profile',
         element: <ProfilePage />,
       },
+      // {
+      //   path: '/task/:taskId',
+      //   element: <CodeTaskPage />
+      // }
     ]
   },
   {

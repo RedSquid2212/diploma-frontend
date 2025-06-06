@@ -4,8 +4,15 @@ import { UserAvatar } from '../UserAvatar/UserAvatar';
 import styles from './Header.module.scss';
 import { Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../AppContext/AppContext';
 
 const HeaderComponent: FC = () => {
+    const context = useAppContext();
+    const tasks = context?.data.courses
+        .flatMap(item => item.themes)
+        .flatMap(item => item.tasks) ?? [];
+    const randomIndex = Math.floor(Math.random() * tasks?.length);
+
     return (
         <header className={styles.header}>
             <Link to={'/'}>
@@ -28,10 +35,10 @@ const HeaderComponent: FC = () => {
                 <Link to={'/html'}>
                     HTML
                 </Link>
-                <Link to={'/html'}>
+                <Link to={'/game'}>
                     Игровой режим
                 </Link>
-                <Link to={'/html'}>
+                <Link to={`/task/${tasks[randomIndex]?._id}`}>
                     Случайная задача
                 </Link>
             </div>
