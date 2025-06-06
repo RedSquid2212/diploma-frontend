@@ -23,7 +23,11 @@ const TheoryPageComponent: FC = () => {
                 <CourseHeaderCard courseName={courseName} />
                 <div className={styles.contentContainer}>
                     <CourseContent themes={themes} />
-                    <ProgressCard courseColor={courseColor} />
+                    <ProgressCard
+                        courseColor={courseColor}
+                        buttonLabel='Перейти к практике'
+                        navigateTo={`/${course}/practice`}
+                    />
                 </div>
             </div>
         </div>

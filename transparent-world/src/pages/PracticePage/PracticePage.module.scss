@@ -1,8 +1,9 @@
-.container {
+.practiceContainer {
+    padding: 0 100px;
+}
+
+.practiceContentContainer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    gap: 100px;
+    margin-top: 20px;
 }

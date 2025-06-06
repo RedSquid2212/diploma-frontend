@@ -17,11 +17,11 @@ const CourseContentComponent: FC<Props> = ({ themes }) => {
             </h2>
             {
                 themes.map(theme => (
-                    <Accordion key={theme.name}>
+                    <Accordion key={theme.title}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon sx={{color: '#E0E0E0'}}/>}
                         >
-                            { theme.label }
+                            { theme.title }
                         </AccordionSummary>
                         <AccordionDetails>
                             Теория по теме

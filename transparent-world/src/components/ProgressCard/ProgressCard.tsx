@@ -1,15 +1,23 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress } from '@mui/material';
+import { Card, CardContent, CardHeader, CircularProgress } from '@mui/material';
 import { FC, memo } from 'react';
 
 import './ProgressCard.scss';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useAppContext } from '../AppContext/AppContext';
+import { CourseButton } from '../CourseButton/CourseButton';
 
 type Props = {
     readonly courseColor: string;
+    readonly buttonLabel: string;
+    readonly navigateTo: string;
 };
 
-const ProgressCardComponent: FC<Props> = ({ courseColor }) => {
+const ProgressCardComponent: FC<Props> = ({ courseColor, buttonLabel, navigateTo }) => {
     const { course } = useParams();
+    const context = useAppContext();
+    const progress = context?.data.courses
+        .find(item => item.title === course?.toUpperCase())?.progress ?? 0;
+
     return (
         <Card
             className='progressCard'
@@ -21,24 +29,19 @@ const ProgressCardComponent: FC<Props> = ({ courseColor }) => {
             <CardContent>
                 <div className='progressStat'>
                     <span>
-                        Выполнено 60% заданий
+                        Выполнено { Math.round(progress) }% заданий
                     </span>
                     <CircularProgress
                         variant="determinate"
-                        value={60}
+                        value={Math.round(progress)}
                         sx={{color: courseColor}}
                     />
                 </div>
-                <Link to={`/${course}/practice`}>
-                    <Button
-                        type="button"
-                        variant="contained"
-                        className='practiceButton'
-                        sx={{backgroundColor: courseColor}}
-                    >
-                        Перейти к практике
-                    </Button>
-                </Link>
+                <CourseButton
+                    courseColor={courseColor}
+                    navigateTo={navigateTo}
+                    label={buttonLabel}
+                />
             </CardContent>
         </Card>
     );
