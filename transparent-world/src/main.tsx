@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CoursesPage } from './pages/CoursesPage/CoursesPage.tsx';
 import { TheoryPage } from './pages/TheoryPage/TheoryPage.tsx';
 import { PracticePage } from './pages/PracticePage/PracticePage.tsx';
-import { GeometryRunnerPage } from './pages/GeometryRunnerPage/GeometryRunnerPage.tsx';
 import { LoginPage } from './pages/LoginPage/LoginPage.tsx';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage.tsx';
 import { ParticlesBackground } from './components/ParticlesBackground/ParticlesBackground.tsx';
@@ -30,12 +29,6 @@ const router = createBrowserRouter([
         </PrivateRoute>,
       },
       {
-        path: '/runner',
-        element: <PrivateRoute authStatus={AuthStatus.Authorized}>
-          <GeometryRunnerPage />
-        </PrivateRoute>,
-      },
-      {
         path: '/:course',
         element: <PrivateRoute authStatus={AuthStatus.Authorized}>
           <TheoryPage />
@@ -51,12 +44,16 @@ const router = createBrowserRouter([
         path: '/profile',
         element: <ProfilePage />,
       },
+      // {
+      //   path: '/game',
+      //   element: <ProfilePage />,
+      // },
       {
         path: '/task/:taskId',
         element: <CodeTaskPage />
       },
       {
-        path: '/:course/practice/:task',
+        path: '/:course/practice/:taskId',
         element: <PrivateRoute authStatus={AuthStatus.Authorized}>
           <CodeTaskPage />
         </PrivateRoute>,

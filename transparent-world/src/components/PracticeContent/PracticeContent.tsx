@@ -1,11 +1,14 @@
 import { Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { FC, memo } from 'react';
+import { FC, memo, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Theme } from '../../models/theme';
 
 import './PracticeContent.scss';
 import { useAppContext } from '../AppContext/AppContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import { TestModal } from '../TestModal/TestModal';
+import { Task } from '../../models/task';
+import { TaskType } from '../../models/taskType.enum';
 
 type Props = {
     readonly themes: readonly Theme[];
@@ -15,6 +18,7 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
     const context = useAppContext();
     const navigate = useNavigate();
     const { course } = useParams();
+    const [isOpen, setIsOpen] = useState(false);
 
     if (!context) {
         navigate('/login');
@@ -24,6 +28,14 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
         .filter(item => item.title === course?.toUpperCase())
         .flatMap(item => item.themes)
         .flatMap(item => item.tasks);
+
+    const handleTaskButtonClick = (task: Task) => {
+        if (task.type === TaskType.Test) {
+            setIsOpen(true);
+        } else {
+            navigate(`/${course}/practice/${task._id}`);
+        }
+    };
 
     return (
         <div className='practiceContentContainer'>
@@ -42,9 +54,9 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
                             <List>
                                 {
                                     tasks?.filter(item => item.themeId === theme._id)
-                                        .map(item => (
+                                        ?.map(item => (
                                             <ListItem key={item._id}>
-                                                <ListItemButton>
+                                                <ListItemButton onClick={() => handleTaskButtonClick(item)}>
                                                     <ListItemText>
                                                         {item.title}
                                                     </ListItemText>
@@ -57,6 +69,7 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
                     </Accordion>
                 ))
             }
+            <TestModal open={isOpen} onOpen={setIsOpen} />
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { FC, memo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './RegistrationForm.scss';
 import { client } from '../../services/client.service';
@@ -9,11 +9,14 @@ const RegistrationFormComponent: FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passwordAgain, setPasswordAgain] = useState('');
+    const navigate = useNavigate();
 
     const handleRegisterButtonClick = async () => {
         try {
-            const result = await client.register({ username, password, passwordAgain });
-            console.log(result);
+            await client.register({ username, password, passwordAgain });
+            setTimeout(() => {
+                navigate('/');
+            }, 300);
         } catch (error: unknown) {
             console.error(error);
         }

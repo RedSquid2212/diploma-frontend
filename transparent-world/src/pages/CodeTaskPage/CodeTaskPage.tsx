@@ -4,7 +4,7 @@ import { CodeEditor } from '../../components/CodeEditor/CodeEditor';
 import './CodeTaskPage.scss';
 import { Button } from '@mui/material';
 import { generateColorInPalette } from '../../utils/colorGenerator';
-import { CodeCheckerService } from '../../services/codeChecker.service';
+import { CodeCheckerService, TestCase } from '../../services/codeChecker.service';
 import { useAppContext } from '../../components/AppContext/AppContext';
 import { useParams } from 'react-router-dom';
 
@@ -26,14 +26,11 @@ const CodeTaskPageComponent: FC = () => {
         .find(item => item._id === taskId);
 
     const handleSendButtonClick = useCallback(() => {
+        const tests = task?.tests ?? [];
         const problem = {
-            id: 'sum-two-numbers',
-            functionName: 'sum',
-            testCases: [
-                { input: [1, 2], expected: 3 },
-                { input: [-1, 1], expected: 0 },
-                { input: [0, 0], expected: 0 },
-            ],
+            id: task?._id ?? '',
+            functionName: 'getEvenNumbers',
+            testCases: [...tests] as TestCase<unknown[], unknown>[],
             timeout: 3000,
         };
 
@@ -47,7 +44,7 @@ const CodeTaskPageComponent: FC = () => {
             .catch(error => {
                 console.error('Ошибка проверки:', error.message);
             });
-    }, [editorValue]);
+    }, [editorValue, task]);
 
     return (
         <div className='code-task-page'>
@@ -61,7 +58,10 @@ const CodeTaskPageComponent: FC = () => {
                 </p>
             </section>
             <section className='code-task-editor'>
-                <CodeEditor onValueChange={setEditorValue} />
+                <CodeEditor
+                    onValueChange={setEditorValue}
+                    placeholder={task?.placeholderCode?.trim() ?? '// место для вашего кода'}
+                />
                 <Button
                     variant="contained"
                     className='send-button'

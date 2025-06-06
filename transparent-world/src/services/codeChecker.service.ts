@@ -1,124 +1,124 @@
-type TestCase<TInput extends unknown[], TOutput> = {
-    input: TInput;
-    expected: TOutput;
-    description?: string;
+export type TestCase<TInput extends unknown[], TOutput> = {
+  readonly input: TInput;
+  readonly expected: TOutput;
+  readonly description?: string;
 };
 
 type ProblemDefinition<TInput extends unknown[], TOutput> = {
-    id: string;
-    functionName: string;
-    testCases: TestCase<TInput, TOutput>[];
-    timeout?: number;
+  readonly id: string;
+  readonly functionName: string;
+  readonly testCases: TestCase<TInput, TOutput>[];
+  readonly timeout?: number;
 };
 
 type TestResult<TInput extends unknown[], TOutput> = {
-    input: TInput;
-    expected: TOutput;
-    actual: TOutput | undefined;
-    passed: boolean;
-    error?: string;
-    inputString?: string;
+  readonly input: TInput;
+  readonly expected: TOutput;
+  readonly actual: TOutput | undefined;
+  readonly passed: boolean;
+  readonly error?: string;
+  readonly inputString?: string;
 };
 
 export class CodeCheckerService<TInput extends unknown[], TOutput> {
-    private static readonly DEFAULT_TIMEOUT = 2000;
-    private static readonly SANDBOX_IFRAME_ID = 'code-checker-sandbox';
+  private static readonly DEFAULT_TIMEOUT = 2000;
+  private static readonly SANDBOX_IFRAME_ID = 'code-checker-sandbox';
 
-    constructor(private problem: ProblemDefinition<TInput, TOutput>) { }
+  constructor(private problem: ProblemDefinition<TInput, TOutput>) { }
 
-    public async checkUserCode(userCode: string): Promise<{
-        passed: boolean;
-        results: TestResult<TInput, TOutput>[];
-    }> {
-        this.validateCodeSafety(userCode);
-        const sandbox = this.createSandboxIframe();
+  public async checkUserCode(userCode: string): Promise<{
+    passed: boolean;
+    results: TestResult<TInput, TOutput>[];
+  }> {
+    this.validateCodeSafety(userCode);
+    const sandbox = this.createSandboxIframe();
 
-        try {
-            const results = await this.executeInSandbox(
-                sandbox,
-                userCode,
-                this.problem.functionName,
-                this.problem.testCases,
-                this.problem.timeout || CodeCheckerService.DEFAULT_TIMEOUT
-            );
+    try {
+      const results = await this.executeInSandbox(
+        sandbox,
+        userCode,
+        this.problem.functionName,
+        this.problem.testCases,
+        this.problem.timeout || CodeCheckerService.DEFAULT_TIMEOUT
+      );
 
-            return {
-                passed: results.every(r => r.passed),
-                results,
-            };
-        } finally {
-            sandbox.remove();
-        }
+      return {
+        passed: results.every(r => r.passed),
+        results,
+      };
+    } finally {
+      sandbox.remove();
+    }
+  }
+
+  private validateCodeSafety(code: string): void {
+    const forbiddenPatterns = [
+      /eval\s*\(/,
+      /new\s+Function\s*\(/,
+      /setTimeout\s*\([^)]*\)/,
+      /setInterval\s*\([^)]*\)/,
+      /fetch\s*\(/,
+      /XMLHttpRequest/,
+      /\.innerHTML\s*=/,
+      /document\.(write|writeln)/,
+      /window\.(open|location)/,
+      /importScripts/,
+      /require\s*\(/,
+      /process\./,
+    ];
+
+    for (const pattern of forbiddenPatterns) {
+      if (pattern.test(code)) {
+        throw new Error(
+          `Код содержит потенциально опасные конструкции: ${pattern.source}`
+        );
+      }
+    }
+  }
+
+  private createSandboxIframe(): HTMLIFrameElement {
+    let iframe = document.getElementById(
+      CodeCheckerService.SANDBOX_IFRAME_ID
+    ) as HTMLIFrameElement;
+
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = CodeCheckerService.SANDBOX_IFRAME_ID;
+      iframe.style.display = 'none';
+      iframe.sandbox.add('allow-scripts');
+      document.body.appendChild(iframe);
     }
 
-    private validateCodeSafety(code: string): void {
-        const forbiddenPatterns = [
-            /eval\s*\(/,
-            /new\s+Function\s*\(/,
-            /setTimeout\s*\([^)]*\)/,
-            /setInterval\s*\([^)]*\)/,
-            /fetch\s*\(/,
-            /XMLHttpRequest/,
-            /\.innerHTML\s*=/,
-            /document\.(write|writeln)/,
-            /window\.(open|location)/,
-            /importScripts/,
-            /require\s*\(/,
-            /process\./,
-        ];
+    return iframe;
+  }
 
-        for (const pattern of forbiddenPatterns) {
-            if (pattern.test(code)) {
-                throw new Error(
-                    `Код содержит потенциально опасные конструкции: ${pattern.source}`
-                );
-            }
+  private async executeInSandbox(
+    iframe: HTMLIFrameElement,
+    userCode: string,
+    functionName: string,
+    testCases: TestCase<TInput, TOutput>[],
+    timeout: number
+  ): Promise<TestResult<TInput, TOutput>[]> {
+    return new Promise((resolve) => {
+      const timeoutId = setTimeout(() => {
+        iframe.contentWindow?.postMessage({ type: 'timeout' }, '*');
+      }, timeout);
+
+      const messageHandler = (event: MessageEvent) => {
+        if (event.source !== iframe.contentWindow) return;
+
+        if (event.data.type === 'result') {
+          clearTimeout(timeoutId);
+          window.removeEventListener('message', messageHandler);
+          resolve(event.data.results);
         }
-    }
+      };
 
-    private createSandboxIframe(): HTMLIFrameElement {
-        let iframe = document.getElementById(
-            CodeCheckerService.SANDBOX_IFRAME_ID
-        ) as HTMLIFrameElement;
+      window.addEventListener('message', messageHandler);
 
-        if (!iframe) {
-            iframe = document.createElement('iframe');
-            iframe.id = CodeCheckerService.SANDBOX_IFRAME_ID;
-            iframe.style.display = 'none';
-            iframe.sandbox.add('allow-scripts');
-            document.body.appendChild(iframe);
-        }
+      const testScript = this.generateTestScript(userCode, functionName, testCases);
 
-        return iframe;
-    }
-
-    private async executeInSandbox(
-        iframe: HTMLIFrameElement,
-        userCode: string,
-        functionName: string,
-        testCases: TestCase<TInput, TOutput>[],
-        timeout: number
-    ): Promise<TestResult<TInput, TOutput>[]> {
-        return new Promise((resolve) => {
-            const timeoutId = setTimeout(() => {
-                iframe.contentWindow?.postMessage({ type: 'timeout' }, '*');
-            }, timeout);
-
-            const messageHandler = (event: MessageEvent) => {
-                if (event.source !== iframe.contentWindow) return;
-
-                if (event.data.type === 'result') {
-                    clearTimeout(timeoutId);
-                    window.removeEventListener('message', messageHandler);
-                    resolve(event.data.results);
-                }
-            };
-
-            window.addEventListener('message', messageHandler);
-
-            const testScript = this.generateTestScript(userCode, functionName, testCases);
-
-            iframe.srcdoc = `
+      iframe.srcdoc = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -129,23 +129,24 @@ export class CodeCheckerService<TInput extends unknown[], TOutput> {
         <body></body>
         </html>
       `;
-        });
-    }
+    });
+  }
 
-    private generateTestScript(
-        userCode: string,
-        functionName: string,
-        testCases: TestCase<TInput, TOutput>[]
-    ): string {
-        const testCasesScript = testCases
-            .map((testCase) => {
-                const inputJson = JSON.stringify(testCase.input);
-                const expectedJson = JSON.stringify(testCase.expected);
-                const inputArgs = testCase.input.map((arg) => JSON.stringify(arg)).join(', ');
+  private generateTestScript(
+    userCode: string,
+    functionName: string,
+    testCases: TestCase<TInput, TOutput>[]
+  ): string {
+    const testCasesScript = testCases
+      .map((testCase) => {
+        const inputJson = JSON.stringify(testCase.input);
+        const expectedJson = JSON.stringify(testCase.expected);
+        const inputArgs = testCase.input.map((arg) => JSON.stringify(arg)).join(', ');
 
-                return `
+        // Нужно настроить штуку, когда аргумент функции - массив
+        return `
         try {
-          const result = ${functionName}(...${inputJson});
+          const result = ${functionName}(${inputJson});
           const passed = deepEqual(result, ${expectedJson});
           testResults.push({
             input: ${inputJson},
@@ -165,10 +166,10 @@ export class CodeCheckerService<TInput extends unknown[], TOutput> {
           });
         }
       `;
-            })
-            .join('\n');
+      })
+      .join('\n');
 
-        return `
+    return `
     const testResults = [];
     const deepEqual = (a, b) => {
       try {
@@ -206,5 +207,5 @@ export class CodeCheckerService<TInput extends unknown[], TOutput> {
       }, '*');
     }
   `;
-    }
+  }
 }
