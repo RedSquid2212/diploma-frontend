@@ -1,5 +1,6 @@
-import { Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
 import { FC, memo, useState } from 'react';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Theme } from '../../models/theme';
 
@@ -20,6 +21,7 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
     const { course } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [testTask, setTestTask] = useState<Task | null>(null);
+    const [themeId, setThemeId] = useState('');
 
     if (!context) {
         navigate('/login');
@@ -30,8 +32,9 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
         .flatMap(item => item.themes)
         .flatMap(item => item.tasks);
 
-    const handleTaskButtonClick = (task: Task) => {
+    const handleTaskButtonClick = (task: Task, themeId: string) => {
         if (task.type === TaskType.Test) {
+            setThemeId(themeId);
             setTestTask(task);
             setIsOpen(true);
         } else {
@@ -58,10 +61,21 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
                                     tasks?.filter(item => item.themeId === theme._id)
                                         ?.map(item => (
                                             <ListItem key={item._id}>
-                                                <ListItemButton onClick={() => handleTaskButtonClick(item)}>
-                                                    <ListItemText>
-                                                        {item.title}
-                                                    </ListItemText>
+                                                <ListItemButton onClick={() => handleTaskButtonClick(item, theme._id)}>
+                                                    {
+                                                        item.isSolved ?
+                                                            <>
+                                                                <ListItemIcon>
+                                                                    <CheckCircleIcon />
+                                                                </ListItemIcon>
+                                                                <ListItemText>
+                                                                    {item.title}
+                                                                </ListItemText>
+                                                            </> :
+                                                            <ListItemText>
+                                                                {item.title}
+                                                            </ListItemText>
+                                                    }
                                                 </ListItemButton>
                                             </ListItem>
                                         ))
@@ -71,7 +85,14 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
                     </Accordion>
                 ))
             }
-            <TestModal open={isOpen} onOpen={setIsOpen} task={testTask} />
+            <TestModal
+                open={isOpen}
+                onOpen={setIsOpen}
+                task={testTask}
+                themeId={themeId}
+                isGameMode={false}
+                xp={50}
+            />
         </div>
     );
 };

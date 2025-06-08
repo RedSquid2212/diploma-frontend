@@ -1,18 +1,68 @@
-import { Button, Dialog, DialogTitle, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { FC, memo } from 'react';
+import { Alert, Button, Dialog, DialogTitle, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { FC, memo, useState } from 'react';
 
 import './TestModal.scss';
 import { Task } from '../../models/task';
+import { client } from '../../services/client.service';
+import { useParams } from 'react-router-dom';
+import { useAppContext } from '../AppContext/AppContext';
 
 type Props = {
     readonly open: boolean;
     readonly onOpen: (isOpen: boolean) => void;
     readonly task: Task | null;
+    readonly themeId: string | null;
+    readonly isGameMode: boolean;
+    readonly xp: number;
 };
 
-const TestModalComponent: FC<Props> = ({ open, onOpen, task }) => {
+const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode, xp }) => {
+    const [value, setValue] = useState('');
+    const { course } = useParams();
+    const context = useAppContext();
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    const contextCourse = context?.data.courses.find(item => item.title === course?.toUpperCase());
+    const user = context?.data.user;
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue((event.target as HTMLInputElement).value);
+        setError('');
+    };
+
     const handleClose = () => {
         onOpen(false);
+    };
+
+    const handleAnswer = async () => {
+        if (value === task?.answer) {
+            setSuccess('Правильно!');
+            if (!task.isSolved && !isGameMode) {
+                await client.updateThemeProgress({
+                    userId: user?._id ?? '',
+                    courseId: contextCourse?._id ?? '',
+                    themeId: themeId ?? '',
+                    taskId: task._id ?? '',
+                    xp,
+                });
+            } else if (task.isSolved && !isGameMode) {
+                await client.updateThemeProgress({
+                    userId: user?._id ?? '',
+                    courseId: contextCourse?._id ?? '',
+                    themeId: themeId ?? '',
+                    taskId: task._id ?? '',
+                    xp: 0
+                });
+            } else if (isGameMode) {
+                await client.updateGameRecord({
+                    userId: user?._id ?? '',
+                    newGameXp: xp,
+                });
+            }
+        } else {
+            setError('Неправильный ответ');
+        }
     };
 
     return (
@@ -24,6 +74,8 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task }) => {
             <FormControl>
                 <RadioGroup
                     name="controlled-radio-buttons-group"
+                    value={value}
+                    onChange={handleChange}
                 >
                     {
                         task?.variants?.map((variant, index) => (
@@ -36,7 +88,19 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task }) => {
                         ))
                     }
                 </RadioGroup>
-                <Button type="button" variant="contained">
+                {
+                    success && <Alert security="success" variant="outlined">{success}</Alert>
+                }
+                {
+                    error && <Alert
+                        severity="error"
+                        variant="outlined"
+                        onClose={() => setError('')}
+                    >
+                        {error}
+                    </Alert>
+                }
+                <Button type="button" variant="contained" onClick={handleAnswer}>
                     Отправить
                 </Button>
             </FormControl>

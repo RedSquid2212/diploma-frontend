@@ -21,3 +21,17 @@
     font-family: 'Manrope', system-ui;
     font-weight: 700;
 }
+
+.MuiPaper-root.MuiPaper-rounded.MuiAlert-root {
+    margin-top: 20px;
+}
+
+.MuiPaper-root.MuiPaper-rounded.MuiAlert-root.MuiAlert-colorError {
+    color: red;
+    font-family: 'Manrope', system-ui;
+}
+
+.MuiPaper-root.MuiPaper-rounded.MuiAlert-root.MuiAlert-colorSuccess {
+    color: green;
+    font-family: 'Manrope', system-ui;
+}

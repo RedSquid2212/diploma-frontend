@@ -13,3 +13,11 @@
     font-family: 'Manrope', system-ui;
     margin-top: 0;
 }
+
+.MuiButtonBase-root.MuiListItemButton-root {
+    .MuiListItemIcon-root {
+        color: green;
+        min-width: 0;
+        padding-right: 10px;
+    }
+}

@@ -14,5 +14,7 @@ export type Task = {
     readonly text: string;
     readonly placeholderCode?: string;
     readonly tests: readonly Test[];
+    readonly isSolved: boolean;
+    readonly answer?: string;
     readonly variants?: readonly string[];
 };
