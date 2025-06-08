@@ -9,6 +9,8 @@ import { StartButton } from './components/StartButton/StartButton';
 import { createStage, isColliding } from './helpers/helpers';
 import { StyledTetrisWrapper, StyledTetris } from './Tetris.styled';
 
+import './Tetris.scss';
+
 const TetrisComponent: FC = () => {
   const [dropTime, setDroptime] = useState<null | number>(null);
   const [gameOver, setGameOver] = useState(true);
@@ -82,6 +84,25 @@ const TetrisComponent: FC = () => {
 
   return (
     <StyledTetrisWrapper role='button' tabIndex={0} onKeyDown={move} onKeyUp={keyUp} ref={gameArea}>
+      <div className='gameInfo'>
+        <h1 className='gameTitle'>
+          Тетрис с модификациями
+        </h1>
+        <p className='rules'>
+          Правила игры:
+          <ul>
+            <li>
+              Управляйте фигурами, используя клавиши &#8592; (для движения влево), &#8594; (для движения вправо), &#8593; (для поворота), &#8595; (для ускорения)
+            </li>
+            <li>
+              При заполнении ряда решайте задачу из модального окна
+            </li>
+            <li>
+              Будьте внимательны: у вас всего одна попытка на решение!
+            </li>
+          </ul>
+        </p>
+      </div>
       <StyledTetris>
         <div className='display'>
           {gameOver ? (
