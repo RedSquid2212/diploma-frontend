@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -14,6 +13,7 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage.tsx';
 import { App } from './App.tsx';
 import { AppContextProvider } from './components/AppContext/AppContext.tsx';
 import { CodeTaskPage } from './pages/CodeTaskPage/CodeTaskPage.tsx';
+import { TetrisPage } from './pages/TetrisPage/TetrisPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -44,10 +44,10 @@ const router = createBrowserRouter([
         path: '/profile',
         element: <ProfilePage />,
       },
-      // {
-      //   path: '/game',
-      //   element: <ProfilePage />,
-      // },
+      {
+        path: '/game',
+        element: <TetrisPage />,
+      },
       {
         path: '/task/:taskId',
         element: <CodeTaskPage />
@@ -71,8 +71,8 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <>
     <ParticlesBackground />
     <RouterProvider router={router} />
-  </StrictMode>,
+  </>,
 )
