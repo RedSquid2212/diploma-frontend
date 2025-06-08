@@ -19,6 +19,7 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
     const navigate = useNavigate();
     const { course } = useParams();
     const [isOpen, setIsOpen] = useState(false);
+    const [testTask, setTestTask] = useState<Task | null>(null);
 
     if (!context) {
         navigate('/login');
@@ -31,6 +32,7 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
 
     const handleTaskButtonClick = (task: Task) => {
         if (task.type === TaskType.Test) {
+            setTestTask(task);
             setIsOpen(true);
         } else {
             navigate(`/${course}/practice/${task._id}`);
@@ -69,7 +71,7 @@ const PracticeContentComponent: FC<Props> = ({ themes }) => {
                     </Accordion>
                 ))
             }
-            <TestModal open={isOpen} onOpen={setIsOpen} />
+            <TestModal open={isOpen} onOpen={setIsOpen} task={testTask} />
         </div>
     );
 };

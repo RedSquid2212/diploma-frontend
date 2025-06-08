@@ -2,32 +2,18 @@ import { Button, Dialog, DialogTitle, FormControl, FormControlLabel, Radio, Radi
 import { FC, memo } from 'react';
 
 import './TestModal.scss';
-import { useAppContext } from '../AppContext/AppContext';
-import { useParams } from 'react-router-dom';
+import { Task } from '../../models/task';
 
 type Props = {
     readonly open: boolean;
     readonly onOpen: (isOpen: boolean) => void;
+    readonly task: Task | null;
 };
 
-const TestModalComponent: FC<Props> = ({ open, onOpen }) => {
-    const context = useAppContext();
-    const { course, taskId } = useParams();
-
+const TestModalComponent: FC<Props> = ({ open, onOpen, task }) => {
     const handleClose = () => {
         onOpen(false);
     };
-
-    const task = context?.data.courses
-        .filter(item => {
-            if (course) {
-                return item.title === course.toUpperCase();
-            }
-            return true;
-        })
-        .flatMap(item => item.themes)
-        .flatMap(item => item.tasks)
-        .find(item => item._id === taskId);
 
     return (
         <Dialog open={open} className='testDialog' onClose={handleClose}>

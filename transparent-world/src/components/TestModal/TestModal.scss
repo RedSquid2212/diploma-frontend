@@ -1,3 +1,23 @@
-.testDialog {
-    width: 400px;
+.MuiPaper-root.MuiPaper-elevation.MuiDialog-paper {
+    width: fit-content;
+    padding: 20px;
+    font-family: 'Manrope', system-ui;
+    background-color: #0D0D0D;
+    border: 1px solid #E0E0E0;
+    color: #E0E0E0;
+
+    .MuiButtonBase-root.MuiButton-root.MuiButton-contained {
+        background-color: #FF10F0;
+        margin-top: 20px;
+        text-transform: none;
+        font-family: 'Manrope', system-ui;
+        font-size: 18px;
+    }
+}
+
+.MuiTypography-root.MuiTypography-h6.MuiDialogTitle-root {
+    padding: 0;
+    text-align: center;
+    font-family: 'Manrope', system-ui;
+    font-weight: 700;
 }
