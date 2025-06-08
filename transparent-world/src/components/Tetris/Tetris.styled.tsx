@@ -19,6 +19,6 @@ export const StyledTetris = styled.div`
   .display {
     display: flex;
     justify-content: space-between;
-    width: 380px;
+    width: 330px;
   }
 `;

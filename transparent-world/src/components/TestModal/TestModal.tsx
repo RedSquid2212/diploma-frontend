@@ -13,10 +13,12 @@ type Props = {
     readonly task: Task | null;
     readonly themeId: string | null;
     readonly isGameMode: boolean;
+    readonly onGameOver?: (isGameOver: boolean) => void;
+    readonly onAnswerSuccess?: (isAnswerSuccess: boolean) => void;
     readonly xp: number;
 };
 
-const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode, xp }) => {
+const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode, xp, onGameOver, onAnswerSuccess }) => {
     const [value, setValue] = useState('');
     const { course } = useParams();
     const context = useAppContext();
@@ -32,6 +34,8 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode
     };
 
     const handleClose = () => {
+        setError('');
+        setSuccess('');
         onOpen(false);
     };
 
@@ -55,13 +59,20 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode
                     xp: 0
                 });
             } else if (isGameMode) {
+                onAnswerSuccess?.(true);
+                onOpen(false);
+            }
+        } else {
+            setError('Неправильный ответ');
+            if (isGameMode) {
                 await client.updateGameRecord({
                     userId: user?._id ?? '',
                     newGameXp: xp,
                 });
+                onAnswerSuccess?.(false);
+                onGameOver?.(true);
+                onOpen(false);
             }
-        } else {
-            setError('Неправильный ответ');
         }
     };
 

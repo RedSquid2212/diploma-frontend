@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridValidRowModel } from '@mui/x-data-grid';
 import { FC, memo, useEffect, useState } from 'react';
 
 import './Leaderboard.scss';
@@ -10,7 +10,7 @@ import { GameLeaderboardRow } from '../../models/gameLeaderboardRow';
 
 const LeaderboardComponent: FC = () => {
     const [leaderboardType, setLeaderboardType] = useState<string>('general');
-    const [rows, setRows] = useState<unknown[]>([]);
+    const [rows, setRows] = useState<readonly GridValidRowModel[]>([]);
 
     const standardColumns: GridColDef[] = [
         { field: 'id', headerName: 'Place', width: 90 },

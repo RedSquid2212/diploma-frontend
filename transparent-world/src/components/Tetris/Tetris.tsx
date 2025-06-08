@@ -10,16 +10,32 @@ import { createStage, isColliding } from './helpers/helpers';
 import { StyledTetrisWrapper, StyledTetris } from './Tetris.styled';
 
 import './Tetris.scss';
+import { TestModal } from '../TestModal/TestModal';
+import { useAppContext } from '../AppContext/AppContext';
+import { client } from '../../services/client.service';
 
 const TetrisComponent: FC = () => {
   const [dropTime, setDroptime] = useState<null | number>(null);
   const [gameOver, setGameOver] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const context = useAppContext();
+  const user = context?.data.user;
+  const [answerSuccess, setAnswerSuccess] = useState(false);
 
   const gameArea = useRef<HTMLDivElement>(null);
 
   const { player, updatePlayerPos, resetPlayer, playerRotate } = usePlayer();
-  const { stage, setStage, rowsCleared } = useStage(player, resetPlayer);
-  const { score, setScore, rows, setRows, level, setLevel } = useGameStatus(rowsCleared);
+  const { stage, setStage, rowsCleared } = useStage(player, resetPlayer, setIsModalOpen);
+  const { score, setScore, rows, setRows, level, setLevel } = useGameStatus(rowsCleared, answerSuccess);
+
+  const getRandomTask = () => {
+    const tasks = context?.data.courses
+      .flatMap(item => item.themes)
+      .flatMap(item => item.tasks)
+      .filter(item => item.type === 'test') ?? [];
+    const randomIndex = Math.floor(Math.random() * tasks.length);
+    return tasks[randomIndex];
+  };
 
   const movePlayer = (dir: number) => {
     if (!isColliding(player, stage, { x: dir, y: 0 })) {
@@ -45,6 +61,13 @@ const TetrisComponent: FC = () => {
     setRows(0);
     setGameOver(false);
   };
+
+  const handleGameOver = async () => {
+    await client.updateGameRecord({
+      userId: user?._id ?? '',
+      newGameXp: score,
+    });
+  }
 
   const move = ({ keyCode, repeat }: { keyCode: number; repeat: boolean }): void => {
     if (!gameOver) {
@@ -73,13 +96,16 @@ const TetrisComponent: FC = () => {
       if (player.pos.y < 1) {
         setGameOver(true);
         setDroptime(null);
+        handleGameOver();
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
     }
   };
 
   useInterval(() => {
-    drop();
+    if (!isModalOpen && !gameOver) {
+      drop();
+    }
   }, dropTime);
 
   return (
@@ -88,7 +114,7 @@ const TetrisComponent: FC = () => {
         <h1 className='gameTitle'>
           Тетрис с модификациями
         </h1>
-        <p className='rules'>
+        <div className='rules'>
           Правила игры:
           <ul>
             <li>
@@ -101,7 +127,7 @@ const TetrisComponent: FC = () => {
               Будьте внимательны: у вас всего одна попытка на решение!
             </li>
           </ul>
-        </p>
+        </div>
       </div>
       <StyledTetris>
         <div className='display'>
@@ -120,6 +146,16 @@ const TetrisComponent: FC = () => {
         </div>
         <Stage stage={stage} />
       </StyledTetris>
+      <TestModal
+        open={isModalOpen}
+        onOpen={setIsModalOpen}
+        task={getRandomTask()}
+        themeId={null}
+        isGameMode={true}
+        xp={score}
+        onGameOver={setGameOver}
+        onAnswerSuccess={setAnswerSuccess}
+      />
     </StyledTetrisWrapper>
   );
 };

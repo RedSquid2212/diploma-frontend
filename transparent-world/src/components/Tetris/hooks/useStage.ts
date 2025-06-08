@@ -5,7 +5,7 @@ import { createStage } from '../helpers/helpers';
 export type STAGECELL = [string | number, string];
 export type STAGE = STAGECELL[][];
 
-export const useStage = (player: PLAYER, resetPlayer: () => void) => {
+export const useStage = (player: PLAYER, resetPlayer: () => void, onModelOpen: (isOpen: boolean) => void) => {
   const [stage, setStage] = useState(createStage());
   const [rowsCleared, setRowsCleared] = useState(0);
 
@@ -17,6 +17,7 @@ export const useStage = (player: PLAYER, resetPlayer: () => void) => {
     const sweepRows = (newStage: STAGE): STAGE => {
       return newStage.reduce((ack, row) => {
         if (row.every(cell => cell[0] !== 0)) {
+          onModelOpen(true);
           setRowsCleared(prev => prev + 1);
           ack.unshift(new Array(newStage[0].length).fill([0, 'clear']) as STAGECELL[]);
           return ack;
@@ -52,7 +53,7 @@ export const useStage = (player: PLAYER, resetPlayer: () => void) => {
     };
 
     setStage(prev => updateStage(prev));
-  }, [player, resetPlayer]);
+  }, [player, resetPlayer, onModelOpen]);
 
   return { stage, setStage, rowsCleared };
 };
