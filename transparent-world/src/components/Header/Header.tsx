@@ -12,6 +12,7 @@ const HeaderComponent: FC = () => {
         .flatMap(item => item.themes)
         .flatMap(item => item.tasks) ?? [];
     const randomIndex = Math.floor(Math.random() * tasks?.length);
+    const user = context?.data.user;
 
     return (
         <header className={styles.header}>
@@ -43,7 +44,7 @@ const HeaderComponent: FC = () => {
                 </Link>
             </div>
             <UserAvatar
-                username='Lina Shmantsar'
+                username={user?.username ?? ''}
             />
         </header>
     );

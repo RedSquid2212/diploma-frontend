@@ -4,4 +4,5 @@ export type User = {
     readonly gameXp: number;
     readonly achievements: readonly string[];
     readonly username: string;
+    readonly level: number;
 };

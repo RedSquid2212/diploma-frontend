@@ -1,12 +1,22 @@
 import { Avatar, Card, CardContent, CardHeader } from '@mui/material';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { FC, memo } from 'react';
 import { UserAvatar } from '../UserAvatar/UserAvatar';
 
 import './ProfileCard.scss';
 import { ProfileProgress } from '../ProfileProgress/ProfileProgress';
 import { LevelProgress } from '../LevelProgress/LevelProgress';
+import { useAppContext } from '../AppContext/AppContext';
 
 const ProfileCardComponent: FC = () => {
+    const context = useAppContext();
+    const user = context?.data.user;
+    const courses = context?.data.courses;
+
+    const jsCourseProgress = courses?.find(course => course.title === 'JS')?.progress;
+    const cssCourseProgress = courses?.find(course => course.title === 'CSS')?.progress;
+    const htmlCourseProgress = courses?.find(course => course.title === 'HTML')?.progress;
+
     return (
         <Card
             sx={{
@@ -18,18 +28,27 @@ const ProfileCardComponent: FC = () => {
         >
             <CardHeader
                 title={
-                    <UserAvatar username='Lina Shmantsar' />
+                    <UserAvatar username={user?.username ?? ''} />
                 }
                 subheader={
                     <div className='statContainer'>
-                        <span>100 XP</span>
-                        <span>0 game XP</span>
-                        <span>1 уровень</span>
+                        <span>{ user?.xp } XP</span>
+                        <span>{ user?.gameXp } game XP</span>
+                        <span>{ user?.level } уровень</span>
                     </div>
                 }
             />
             <CardContent>
-                <LevelProgress />
+                <LevelProgress xp={user?.xp ?? 0} currentLevel={user?.level ?? 1} />
+                <hr className='separator' />
+                <div className='achievementsContainer'>
+                    <h2 className='progressHeader'>
+                        Достижения
+                    </h2>
+                    {
+                        user?.achievements.map(item => <div className='achievement'><EmojiEventsIcon/>{item}</div>)
+                    }
+                </div>
                 <hr className='separator' />
                 <div className='userProgressContaner'>
                     <h2 className='progressHeader'>
@@ -43,7 +62,7 @@ const ProfileCardComponent: FC = () => {
                             </span>
                             <ProfileProgress
                                 courseColor='rgb(255 216 0)'
-                                courseProgress={45}
+                                courseProgress={jsCourseProgress ?? 0}
                             />
                         </div>
                         <div className='userCourseProgress'>
@@ -53,7 +72,7 @@ const ProfileCardComponent: FC = () => {
                             </span>
                             <ProfileProgress
                                 courseColor='rgb(0 58 255)'
-                                courseProgress={14}
+                                courseProgress={cssCourseProgress ?? 0}
                             />
                         </div>
                         <div className='userCourseProgress'>
@@ -63,7 +82,7 @@ const ProfileCardComponent: FC = () => {
                             </span>
                             <ProfileProgress
                                 courseColor='rgb(255 72 0)'
-                                courseProgress={70}
+                                courseProgress={htmlCourseProgress ?? 0}
                             />
                         </div>
                     </div>
