@@ -4,6 +4,7 @@ import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import './CourseHeaderCard.scss';
+import codeBackground from '../../assets/code-background.jpg';
 
 type Props = {
     readonly courseName: string;
@@ -41,7 +42,7 @@ const CourseHeaderCardComponent: FC<Props> = ({ courseName }) => {
                 <CardMedia
                     component='img'
                     alt='code background'
-                    image='/src/assets/code-background.jpg'
+                    image={codeBackground}
                     height={200}
                 />
             </Card>

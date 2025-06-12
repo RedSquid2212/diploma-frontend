@@ -8,6 +8,10 @@ import { ProfileProgress } from '../ProfileProgress/ProfileProgress';
 import { LevelProgress } from '../LevelProgress/LevelProgress';
 import { useAppContext } from '../AppContext/AppContext';
 
+import jsLogo from '../../assets/js.png';
+import cssLogo from '../../assets/css.png';
+import htmlLogo from '../../assets/html.png';
+
 const ProfileCardComponent: FC = () => {
     const context = useAppContext();
     const user = context?.data.user;
@@ -56,7 +60,7 @@ const ProfileCardComponent: FC = () => {
                     </h2>
                     <div className='userCoursesContainer'>
                         <div className='userCourseProgress'>
-                            <Avatar alt='JS' src='/src/assets/js.png' variant="rounded" />
+                            <Avatar alt='JS' src={jsLogo} variant="rounded" />
                             <span className='userCourseTitle'>
                                 Основы JavaScript
                             </span>
@@ -66,7 +70,7 @@ const ProfileCardComponent: FC = () => {
                             />
                         </div>
                         <div className='userCourseProgress'>
-                            <Avatar alt='CSS' src='/src/assets/css.png' variant="rounded" />
+                            <Avatar alt='CSS' src={cssLogo} variant="rounded" />
                             <span className='userCourseTitle'>
                                 Основы CSS
                             </span>
@@ -76,7 +80,7 @@ const ProfileCardComponent: FC = () => {
                             />
                         </div>
                         <div className='userCourseProgress'>
-                            <Avatar alt='HTML' src='/src/assets/html.png' variant="rounded" />
+                            <Avatar alt='HTML' src={htmlLogo} variant="rounded" />
                             <span className='userCourseTitle'>
                                 Основы HTML
                             </span>

@@ -6,6 +6,8 @@ import { Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../AppContext/AppContext';
 
+import appIcon from '../../assets/app-icon.png';
+
 const HeaderComponent: FC = () => {
     const context = useAppContext();
     const tasks = context?.data.courses
@@ -20,7 +22,7 @@ const HeaderComponent: FC = () => {
             <Link to={'/'}>
                 <Avatar
                     alt='app-icon'
-                    src='/src/assets/app-icon.png'
+                    src={appIcon}
                     sx={{ width: 66, height: 66 }}
                 />
             </Link>
