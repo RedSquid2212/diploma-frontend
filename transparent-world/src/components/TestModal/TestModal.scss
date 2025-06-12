@@ -13,6 +13,10 @@
         font-family: 'Manrope', system-ui;
         font-size: 18px;
     }
+
+    .MuiButtonBase-root.MuiButton-root.MuiButton-contained.gameOver {
+        background-color: red;
+    }
 }
 
 .MuiTypography-root.MuiTypography-h6.MuiDialogTitle-root {

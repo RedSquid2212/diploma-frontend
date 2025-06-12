@@ -10,7 +10,8 @@ const HeaderComponent: FC = () => {
     const context = useAppContext();
     const tasks = context?.data.courses
         .flatMap(item => item.themes)
-        .flatMap(item => item.tasks) ?? [];
+        .flatMap(item => item.tasks)
+        .filter(item => item.type === 'code') ?? [];
     const randomIndex = Math.floor(Math.random() * tasks?.length);
     const user = context?.data.user;
 

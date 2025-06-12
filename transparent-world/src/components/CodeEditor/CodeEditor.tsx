@@ -1,5 +1,6 @@
 import { Editor } from '@monaco-editor/react';
 import { FC, memo, useCallback } from 'react';
+import hljs from 'highlight.js';
 
 import './CodeEditor.scss';
 
@@ -13,12 +14,17 @@ const CodeEditorComponent: FC<Props> = ({ onValueChange, placeholder }) => {
         onValueChange(value ?? '');
     }, [onValueChange]);
 
+    const detectLanguage = (code: string) => {
+        const result = hljs.highlightAuto(code, ['javascript', 'html', 'css']);
+        return result.language || 'plaintext';
+    };
+
     return (
         <div className='editor-container'>
             <Editor
                 height='85vh'
                 theme='vs-dark'
-                defaultLanguage='javascript'
+                defaultLanguage={detectLanguage(placeholder)}
                 defaultValue={placeholder}
                 onChange={handleValueChange}
             />

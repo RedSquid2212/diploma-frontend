@@ -36,6 +36,7 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode
     const handleClose = () => {
         setError('');
         setSuccess('');
+        onGameOver?.(true);
         onOpen(false);
     };
 
@@ -60,6 +61,8 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode
                 });
             } else if (isGameMode) {
                 onAnswerSuccess?.(true);
+                setError('');
+                setSuccess('');
                 onOpen(false);
             }
         } else {
@@ -71,7 +74,7 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode
                 });
                 onAnswerSuccess?.(false);
                 onGameOver?.(true);
-                onOpen(false);
+                handleClose();
             }
         }
     };
@@ -114,6 +117,20 @@ const TestModalComponent: FC<Props> = ({ open, onOpen, task, themeId, isGameMode
                 <Button type="button" variant="contained" onClick={handleAnswer}>
                     Отправить
                 </Button>
+                {
+                    isGameMode &&
+                    <Button
+                        type="button"
+                        variant="contained"
+                        onClick={() => {
+                            onGameOver?.(true);
+                            onOpen(false);
+                        }}
+                        className='gameOver'
+                    >
+                        Сдаюсь
+                    </Button>
+                }
             </FormControl>
         </Dialog>
     )
