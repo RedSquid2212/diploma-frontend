@@ -22,7 +22,7 @@ const CodeEditorComponent: FC<Props> = ({ onValueChange, placeholder }) => {
     return (
         <div className='editor-container'>
             <Editor
-                height='85vh'
+                height='75vh'
                 theme='vs-dark'
                 defaultLanguage={detectLanguage(placeholder)}
                 defaultValue={placeholder}
